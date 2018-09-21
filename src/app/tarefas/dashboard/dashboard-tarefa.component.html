@@ -1,18 +1,21 @@
 <h1>Tarefas</h1>
 
-<table class="table table-striped table-bordered table-hover">
-  <tr>
-    <th>Tarefa</th>
-    <th>Situação</th>
-  </tr>
-  <tr *ngFor="let tarefa of tarefas">    
-    <td>
-      {{ tarefa.nome }}
-    </td>
-    <td>
-      {{ tarefa.situacao }}
-    </td>
-  </tr>
-</table>
-
-<p *ngIf="tarefas.length==0">Nenhuma tarefa cadastrada.</p>
+<div *ngFor="let tarefa of tarefas" class="col-md-2">
+    <div class="card-content">
+        <div class="card-desc">
+            <h3>{{ tarefa.nome }}</h3>
+            <h3>{{ tarefa.situacao }}</h3>
+            <p>{{ tarefa.descricao }}</p>
+            <div class="col-md-2">
+              <a href="#">
+                  <span class="glyphicon glyphicon-thumbs-up"></span>
+                </a>
+            </div>
+            <div class="col-md-2">
+              <a href="#">
+                  <span class="glyphicon glyphicon-thumbs-down"></span>
+                </a>  
+            </div>
+        </div>
+    </div>
+</div>

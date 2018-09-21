@@ -3,7 +3,7 @@
 <div class="well">
   <form #formTarefa="ngForm">
     <div class="form-group">
-      <label for="nome">Tarefa:</label>
+      <label for="nome">Nome da Ideia:</label>
       <input 
         type="text"
         class="form-control"
@@ -24,7 +24,28 @@
       </div>
     </div>
     <div class="form-group">
-        <label for="exampleFormControlSelect1">Situação da Tarefa</label>
+      <label for="nome">Descrição da Ideia:</label>
+      <textarea 
+        type="text"
+        class="form-control"
+        id="descricao"
+        name="descricao"
+        [(ngModel)]="tarefa.descricao"
+        #descricao="ngModel"
+        minlength="5" 
+        required> </textarea>
+      <div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)"
+           class="alert alert-danger">
+        <div [hidden]="!descricao.errors.required">
+          Digite a tarefa.
+        </div>
+        <div [hidden]="!descricao.errors.minlength">
+          A tarefa deve conter ao menos 5 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+        <label>Situação da Tarefa</label>
         <select class="form-control"
           id="situacao"
           name="situacao"
