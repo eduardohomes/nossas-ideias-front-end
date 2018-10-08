@@ -20,6 +20,7 @@ export class TarefaService {
     tarefa.qtdGostou = 0
     tarefa.qtdNaoGostou = 0
     tarefa.comentario = []
+    tarefa.favorito = false
   	tarefas.push(tarefa);
   	localStorage['tarefas'] = JSON.stringify(tarefas);
   }
@@ -67,6 +68,7 @@ export class TarefaService {
     });
     localStorage['tarefas'] = JSON.stringify(tarefas);
   }
+
   somarGostou(id: number): void {
     const tarefas: Tarefa[] = this.listarTodos();
     tarefas.forEach((obj, index, objs) => { 
@@ -98,9 +100,20 @@ export class TarefaService {
     });    
     localStorage['tarefas'] = JSON.stringify(tarefas);
   } 
+
   buscarPorComentario(id: number): String [] {
     const tarefas: Tarefa[] = this.listarTodos();    
     const comentario: string [] = tarefas.find(tarefa => tarefa.id === id).comentario;
     return comentario;
+  }
+
+  marcarGostei(id: number): void {
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj, index, objs) => { 
+      if (id === obj.id) {
+        objs[index].favorito = true;  
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
   }
 }

@@ -32,4 +32,8 @@ export class DashboardTarefaComponent implements OnInit {
     this.tarefaService.somarNaoGostou(id);
     this.tarefas = this.dashboardTodos(); 
   } 
+  marcarGostei(id: number): void {  
+    this.tarefaService.marcarGostei(id);
+    this.tarefas = this.dashboardTodos(); 
+  }
 }

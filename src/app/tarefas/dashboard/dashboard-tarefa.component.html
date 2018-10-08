@@ -1,36 +1,92 @@
-   
-<div *ngFor="let tarefa of tarefas" class="col-md-2">
-        <div class="card-content">
-            <div class="card-desc">
-                <h3>{{ tarefa.nome }}</h3>
-                <h3>{{ tarefa.situacao }}</h3>
-                <p>{{ tarefa.descricao }}</p>
-                <div class="col-md-2">  
-                    <button class="glyphicon glyphicon-thumbs-up"                        
-                        type="submit"                 
-                        [id]="tarefa"
-                        (click)="somarGostou(tarefa.id)"                 
-                    >
-                    </button>
-                    <h4>{{ tarefa.qtdGostou }}</h4>
-                </div>   
-                <div class="col-md-2">  
-                        <button class="glyphicon glyphicon-thumbs-down"
-                            type="submit"                        
-                            [id]="tarefa"
-                            (click)="somarNaoGostou(tarefa.id)"                        
-                        >
-                        </button>
-                        <h4>{{ tarefa.qtdNaoGostou }}</h4>
-                </div>   
-                <div class="col-md-2"> 
-                        <button [routerLink]="['/tarefas/comentar/'+tarefa.id]"
-                            class="glyphicon glyphicon-comment"                                                    
-                        >
-                    </button>  
-                    <h4>{{ tarefa.comentario.length }}</h4>                                                         
-            </div>          
-            </div>
+<div class="jumbotron">
+        <div class="container">
+            <h2>Lista de Ideias</h2>
+            <div *ngFor="let tarefa of tarefas" class="col-md-4">
+                    <div class="card-content">
+                        <div class="card-desc">
+                            <h3>{{ tarefa.nome }}</h3>
+                            <h3>{{ tarefa.situacao }}</h3>
+                            <p>{{ tarefa.descricao }}</p>                
+                            <div class="col-md-2">  
+                                <button class="glyphicon glyphicon-thumbs-up"                        
+                                    type="submit"                 
+                                    [id]="tarefa"
+                                    (click)="somarGostou(tarefa.id)"                 
+                                >
+                                </button>
+                                <h4>{{ tarefa.qtdGostou }}</h4>
+                            </div>   
+                            <div class="col-md-2">  
+                                    <button class="glyphicon glyphicon-thumbs-down"
+                                        type="submit"                        
+                                        [id]="tarefa"
+                                        (click)="somarNaoGostou(tarefa.id)"                        
+                                    >
+                                    </button>
+                                    <h4>{{ tarefa.qtdNaoGostou }}</h4>
+                            </div>   
+                            <div class="col-md-2"> 
+                                    <button [routerLink]="['/tarefas/comentar/'+tarefa.id]"
+                                        class="glyphicon glyphicon-comment"                                                    
+                                    >
+                                </button>  
+                                <h4>{{ tarefa.comentario.length }}</h4>                                                         
+                            </div>          
+                            <ng-template [ngIf]="tarefa.favorito">
+                                <div class="col-md-2">   
+                                    <button class="glyphicon glyphicon-star">
+                                    </button>            
+                                </div> 
+                            </ng-template>
+                            <ng-template [ngIf]="!tarefa.favorito">
+                                <div class="col-md-2">
+                                    <button                         
+                                    class="glyphicon glyphicon-star-empty"
+                                    type="submit"                        
+                                    [id]="tarefa"
+                                    (click)="marcarGostei(tarefa.id)"                        
+                                    >
+                                    </button> 
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            <div>
         </div>
     </div>
-<div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <h3>Lista de Favoritos</h3>
+        <div *ngFor="let tarefa of tarefas" class="col-md-4">
+                <ng-template [ngIf]="tarefa.favorito"> 
+                    <div class="card-content">
+                        <div class="card-desc">
+                            <h3>{{ tarefa.nome }}</h3>
+                            <h3>{{ tarefa.situacao }}</h3>
+                            <p>{{ tarefa.descricao }}</p>                
+                            <div class="col-md-2">  
+                                <button class="glyphicon glyphicon-thumbs-up">
+                                </button>
+                                <h4>{{ tarefa.qtdGostou }}</h4>
+                            </div>   
+                            <div class="col-md-2">  
+                                    <button class="glyphicon glyphicon-thumbs-down">
+                                    </button>
+                                    <h4>{{ tarefa.qtdNaoGostou }}</h4>
+                            </div>   
+                            <div class="col-md-2"> 
+                                    <button [routerLink]="['/tarefas/comentar/'+tarefa.id]"
+                                        class="glyphicon glyphicon-comment"                                                    
+                                    >
+                                </button>  
+                                <h4>{{ tarefa.comentario.length }}</h4>                                                         
+                            </div> 
+                        </div>
+                    </div>
+                </ng-template>
+        </div>   
+    </div>
+</div>
