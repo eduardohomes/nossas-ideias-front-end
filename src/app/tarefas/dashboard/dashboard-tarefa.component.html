@@ -1,21 +1,35 @@
-<h1>Tarefas</h1>
-
+   
 <div *ngFor="let tarefa of tarefas" class="col-md-2">
-    <div class="card-content">
-        <div class="card-desc">
-            <h3>{{ tarefa.nome }}</h3>
-            <h3>{{ tarefa.situacao }}</h3>
-            <p>{{ tarefa.descricao }}</p>
-            <div class="col-md-2">
-              <a href="#">
-                  <span class="glyphicon glyphicon-thumbs-up"></span>
-                </a>
-            </div>
-            <div class="col-md-2">
-              <a href="#">
-                  <span class="glyphicon glyphicon-thumbs-down"></span>
-                </a>  
+        <div class="card-content">
+            <div class="card-desc">
+                <h3>{{ tarefa.nome }}</h3>
+                <h3>{{ tarefa.situacao }}</h3>
+                <p>{{ tarefa.descricao }}</p>
+                <div class="col-md-2">  
+                    <button class="glyphicon glyphicon-thumbs-up"                        
+                        type="submit"                 
+                        [id]="tarefa"
+                        (click)="somarGostou(tarefa.id)"                 
+                    >
+                    </button>
+                    <h4>{{ tarefa.qtdGostou }}</h4>
+                </div>   
+                <div class="col-md-2">  
+                        <button class="glyphicon glyphicon-thumbs-down"
+                            type="submit"                        
+                            [id]="tarefa"
+                            (click)="somarNaoGostou(tarefa.id)"                        
+                        >
+                        </button>
+                        <h4>{{ tarefa.qtdNaoGostou }}</h4>
+                </div>   
+                <div class="col-md-2"> 
+                        <button [routerLink]="['/tarefas/comentar/'+tarefa.id]"
+                            class="glyphicon glyphicon-comment"                                                    
+                        >
+                    </button>                                                           
+            </div>          
             </div>
         </div>
     </div>
-</div>
+<div>

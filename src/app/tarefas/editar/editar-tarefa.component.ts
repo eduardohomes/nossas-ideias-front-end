@@ -23,10 +23,9 @@ export class EditarTarefaComponent implements OnInit {
 	  this.tarefa = this.tarefaService.buscarPorId(id);
   }
   atualizar(): void {
-    if (this.formTarefa.form.valid) {
+    if (this.formTarefa.form.valid) {      
 	    this.tarefaService.atualizar(this.tarefa);
 	    this.router.navigate(['/tarefas']);
     }
   }
-
 }

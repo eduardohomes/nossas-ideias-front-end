@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Tarefa } from './';
+import { NumberSymbol } from '@angular/common';
 
 @Injectable()
 export class TarefaService {
@@ -16,6 +17,9 @@ export class TarefaService {
   	const tarefas = this.listarTodos();
     tarefa.id = new Date().getTime();
     tarefa.situacao = "Pendente"
+    tarefa.qtdGostou = 0
+    tarefa.qtdNaoGostou = 0
+    tarefa.comentario = ""
   	tarefas.push(tarefa);
   	localStorage['tarefas'] = JSON.stringify(tarefas);
   }
@@ -63,5 +67,33 @@ export class TarefaService {
     });
     localStorage['tarefas'] = JSON.stringify(tarefas);
   }
- 
+  somarGostou(id: number): void {
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj, index, objs) => { 
+      if (id === obj.id) {
+        objs[index].qtdGostou = objs[index].qtdGostou + 1;  
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
+
+  somarNaoGostou(id: number): void {
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj, index, objs) => { 
+      if (id === obj.id) {
+        objs[index].qtdNaoGostou = objs[index].qtdNaoGostou + 1;  
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  }
+
+  comentar(id: number, texto: string): void {
+    const tarefas: Tarefa[] = this.listarTodos();
+    tarefas.forEach((obj, index, objs) => { 
+      if (id === obj.id) {
+        objs[index].comentario = texto;  
+      }
+    });
+    localStorage['tarefas'] = JSON.stringify(tarefas);
+  } 
 }

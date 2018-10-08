@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'; 
 
 import { TarefaService, Tarefa } from '../shared';
 
@@ -11,7 +12,9 @@ export class DashboardTarefaComponent implements OnInit {
 
   tarefas: Tarefa[];
 
-  constructor(private tarefaService: TarefaService) {}
+  constructor(private tarefaService: TarefaService,
+  	private route: ActivatedRoute,
+  	private router: Router) {}
 
   ngOnInit() {
   	this.tarefas = this.dashboardTodos();
@@ -21,4 +24,12 @@ export class DashboardTarefaComponent implements OnInit {
   	return this.tarefaService.listarTodos();
   }
 
+  somarGostou(id: number): void {  
+      this.tarefaService.somarGostou(id);
+      this.tarefas = this.dashboardTodos(); 
+  } 
+  somarNaoGostou(id: number): void {  
+    this.tarefaService.somarNaoGostou(id);
+    this.tarefas = this.dashboardTodos(); 
+  } 
 }

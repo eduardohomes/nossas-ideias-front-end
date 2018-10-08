@@ -11,6 +11,7 @@ import { ListarTarefaComponent } from './listar';
 import { CadastrarTarefaComponent } from './cadastrar';
 import { EditarTarefaComponent } from './editar';
 import { DashboardTarefaComponent } from './dashboard';
+import { ComentarTarefaComponent } from './comentar';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { DashboardTarefaComponent } from './dashboard';
   	CadastrarTarefaComponent,
     EditarTarefaComponent,
     DashboardTarefaComponent,
-  	TarefaConcluidaDirective
+    TarefaConcluidaDirective,
+    ComentarTarefaComponent
   ],
   providers: [
   	TarefaService
