@@ -96,4 +96,8 @@ export class TarefaService {
     });
     localStorage['tarefas'] = JSON.stringify(tarefas);
   } 
+  buscarPorComentario(id: number): Tarefa {
+    const tarefas: Tarefa[] = this.listarTodos();    
+    return tarefas.find(tarefa => tarefa.id === id);
+  }
 }

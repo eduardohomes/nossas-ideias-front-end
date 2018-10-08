@@ -25,8 +25,8 @@ export class ComentarTarefaComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.tarefa = new Tarefa(0, "", "", "", 0,0,"");     
-    return this.tarefaService.listarTodos();             
+    //this.tarefa = new Tarefa(0, "", "", "", 0,0,"");     
+    this.tarefa = this.listarTodosComentarios();             
   }
 
   comentar(comentario: string): void {     
@@ -37,5 +37,8 @@ export class ComentarTarefaComponent implements OnInit {
   }
   listarTodos(): Tarefa[] {
   	return this.tarefaService.listarTodos();
+  }
+  listarTodosComentarios(): Tarefa {
+  	return this.tarefaService.buscarPorComentario(this.id);
   }
 }
