@@ -7,5 +7,5 @@ export class Tarefa {
 		public situacao?: string,
 		public qtdGostou?: number,
 		public qtdNaoGostou?: number,
-		public comentario?: string) {}
+		public comentario?: string []) {}
 }

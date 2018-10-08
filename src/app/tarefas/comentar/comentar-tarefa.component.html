@@ -8,7 +8,7 @@
         type="text"
         class="form-control"
         id="comentario"
-        name="comentario"
+        name="comentario"        
         [(ngModel)]="tarefa.comentario"
         #comentario="ngModel"
         minlength="5" 
@@ -45,9 +45,9 @@
       <th></th>
       <th></th>
     </tr>
-    <tr>
+    <tr *ngFor="let comentario of comentarios; index as i" [attr.data-index]="i">
       <td class="table-active text-rigth">
-        {{ tarefa.comentario }}
+        {{ comentario }}
       </td>      
     </tr>
-  </table>
+</table>

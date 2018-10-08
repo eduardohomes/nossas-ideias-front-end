@@ -14,12 +14,12 @@ export class TarefaService {
   }
 
   cadastrar(tarefa: Tarefa): void {
-  	const tarefas = this.listarTodos();
+    const tarefas = this.listarTodos();    
     tarefa.id = new Date().getTime();
     tarefa.situacao = "Pendente"
     tarefa.qtdGostou = 0
     tarefa.qtdNaoGostou = 0
-    tarefa.comentario = ""
+    tarefa.comentario = []
   	tarefas.push(tarefa);
   	localStorage['tarefas'] = JSON.stringify(tarefas);
   }
@@ -89,15 +89,18 @@ export class TarefaService {
 
   comentar(id: number, texto: string): void {
     const tarefas: Tarefa[] = this.listarTodos();
+    const comentario: string [] = tarefas.find(tarefa => tarefa.id === id).comentario;
+    const contador: number = comentario.length;           
     tarefas.forEach((obj, index, objs) => { 
-      if (id === obj.id) {
-        objs[index].comentario = texto;  
+      if (id === obj.id) {          
+          objs[index].comentario[contador] = texto;
       }
-    });
+    });    
     localStorage['tarefas'] = JSON.stringify(tarefas);
   } 
-  buscarPorComentario(id: number): Tarefa {
+  buscarPorComentario(id: number): String [] {
     const tarefas: Tarefa[] = this.listarTodos();    
-    return tarefas.find(tarefa => tarefa.id === id);
+    const comentario: string [] = tarefas.find(tarefa => tarefa.id === id).comentario;
+    return comentario;
   }
 }

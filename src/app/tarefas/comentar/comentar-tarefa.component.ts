@@ -14,6 +14,7 @@ export class ComentarTarefaComponent implements OnInit {
   @ViewChild('formComentario') formComentario: NgForm;
   tarefa: Tarefa;  
   tarefas: Tarefa[];
+  comentarios: String[]
   id: number;
   
   constructor(
@@ -25,20 +26,20 @@ export class ComentarTarefaComponent implements OnInit {
    }
 
   ngOnInit() {
-    //this.tarefa = new Tarefa(0, "", "", "", 0,0,"");     
-    this.tarefa = this.listarTodosComentarios();             
+    this.tarefa = new Tarefa(0, "", "", "", 0,0,[]);     
+    this.comentarios = this.listarTodosComentarios();            
   }
 
   comentar(comentario: string): void {     
     if (this.formComentario.form.valid) {        
   	  this.tarefaService.comentar(this.id, comentario);
-  	  //this.router.navigate(["/tarefas"]);
+  	  this.comentarios = this.listarTodosComentarios();
     }
   }
   listarTodos(): Tarefa[] {
   	return this.tarefaService.listarTodos();
   }
-  listarTodosComentarios(): Tarefa {
+  listarTodosComentarios(): String[] {
   	return this.tarefaService.buscarPorComentario(this.id);
   }
 }
