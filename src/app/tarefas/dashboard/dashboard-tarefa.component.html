@@ -2,10 +2,10 @@
         <div class="container">
             <h2>Lista de Ideias</h2>
             <div *ngFor="let tarefa of tarefas" class="col-md-4">
-                    <div class="card-content">
+                    <div *ngIf="tarefa.situacao != 'Pendente'" class="card-content">
                         <div class="card-desc">
                             <h3>{{ tarefa.nome }}</h3>
-                            <h3>{{ tarefa.situacao }}</h3>
+                            <h5>{{ tarefa.situacao }}</h5>
                             <p>{{ tarefa.descricao }}</p>                
                             <div class="col-md-2">  
                                 <button class="glyphicon glyphicon-thumbs-up"                        
