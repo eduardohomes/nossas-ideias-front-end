@@ -3,15 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { 
-  TarefaService, 
-  TarefaConcluidaDirective 
-} from './shared';
+import { TarefaService} from './shared';
 import { ListarTarefaComponent } from './listar';
 import { CadastrarTarefaComponent } from './cadastrar';
 import { EditarTarefaComponent } from './editar';
 import { DashboardTarefaComponent } from './dashboard';
 import { ComentarTarefaComponent } from './comentar';
+import { LogarTarefaComponent } from './logar';
 
 @NgModule({
   imports: [
@@ -24,8 +22,8 @@ import { ComentarTarefaComponent } from './comentar';
   	CadastrarTarefaComponent,
     EditarTarefaComponent,
     DashboardTarefaComponent,
-    TarefaConcluidaDirective,
-    ComentarTarefaComponent
+    ComentarTarefaComponent,
+    LogarTarefaComponent
   ],
   providers: [
   	TarefaService

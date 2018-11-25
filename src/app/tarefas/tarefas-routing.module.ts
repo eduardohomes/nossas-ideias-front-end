@@ -5,11 +5,12 @@ import { CadastrarTarefaComponent } from './cadastrar';
 import { DashboardTarefaComponent } from './dashboard';
 import { EditarTarefaComponent } from './editar';
 import { ComentarTarefaComponent } from './comentar';
+import { LogarTarefaComponent } from './logar';
 
 export const TarefaRoutes: Routes = [
 	{ 
 		path: 'tarefas', 
-		redirectTo: 'tarefas/dashboard' 
+		redirectTo: 'tarefas/logar' 
 	},
 	{ 
 		path: 'tarefas/dashboard', 
@@ -30,5 +31,9 @@ export const TarefaRoutes: Routes = [
 	{ 
 		path: 'tarefas/comentar/:id', 
 		component: ComentarTarefaComponent 
-	}
+	},
+	{ 
+		path: 'tarefas/logar', 
+		component: LogarTarefaComponent
+	}	
 ];

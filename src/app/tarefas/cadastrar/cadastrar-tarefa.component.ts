@@ -12,20 +12,22 @@ import { TarefaService, Tarefa } from '../shared';
 export class CadastrarTarefaComponent implements OnInit {
 
   @ViewChild('formTarefa') formTarefa: NgForm;
+  tarefas: Tarefa[];
   tarefa: Tarefa;
 
   constructor(private tarefaService: TarefaService,
   	private router: Router) { }
 
-  ngOnInit() {
-  	this.tarefa = new Tarefa(0, "", "", "", 0, 0, [], false);
-  }
+  ngOnInit() {  
+    this.tarefa = new Tarefa(0, "", "", "", "","");	    
+  } 
 
-  cadastrar(): void {
-    if (this.formTarefa.form.valid) {
-  	  this.tarefaService.cadastrar(this.tarefa);
-  	  this.router.navigate(["/tarefas"]);
-    }
+  cadastrar(): void {    
+    if (this.formTarefa.form.valid) {      
+      this.tarefaService.cadastrarNovaIdeia(this.tarefa)
+      .subscribe(tarefa => {
+        this.tarefas.push(tarefa);
+      });
+    }   
   }
-
 }

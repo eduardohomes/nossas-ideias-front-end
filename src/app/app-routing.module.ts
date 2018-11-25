@@ -6,10 +6,10 @@ import { TarefaRoutes } from './tarefas';
 export const routes: Routes = [
 	{ 
 		path: '', 
-		redirectTo: '/tarefas/dashboard', 
+		redirectTo: '/tarefas/logar', 
 		pathMatch: 'full' 
 	},
-	...TarefaRoutes,
+	...TarefaRoutes,	
 ];
 
 @NgModule({

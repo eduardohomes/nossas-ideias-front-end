@@ -6,3 +6,4 @@ export * from './cadastrar';
 export * from './editar';
 export * from './dashboard';
 export * from './comentar';
+export * from './logar';

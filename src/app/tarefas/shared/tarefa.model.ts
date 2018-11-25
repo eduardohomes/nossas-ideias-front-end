@@ -2,11 +2,9 @@ export class Tarefa {
 
 	constructor(
 		public id?: number,
-		public nome?: string,
+		public ativa?: string,
+		public comentario_avaliador?: string,
 		public descricao?: string,
-		public situacao?: string,
-		public qtdGostou?: number,
-		public qtdNaoGostou?: number,
-		public comentario?: string [],
-		public favorito?: boolean) {}
+		public nome?: string,
+		public situacao?: string) {}
 }

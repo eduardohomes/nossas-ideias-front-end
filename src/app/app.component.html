@@ -9,6 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">Nossas Ideias</a>
+      <a class="navbar-brand" href="#">Usuario</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -31,11 +32,14 @@
                 </a>
               </li>
             </ul>
-          </li>        
+         </li> 
+         <li><a (click)="logout()">Logout</a>
+         </li>       
       </ul>
     </div>
   </div>
 </nav>
+
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>

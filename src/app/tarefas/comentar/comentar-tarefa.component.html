@@ -9,7 +9,7 @@
         class="form-control"
         id="comentario"
         name="comentario"        
-        [(ngModel)]="tarefa.comentario"
+        [(ngModel)]="comentario.comentario"
         #comentario="ngModel"
         minlength="5" 
         required> 
@@ -26,7 +26,7 @@
     <div class="form-group text-center">
         <button  class="btn btn-success"                        
           type="submit"
-          (click)="comentar(tarefa.comentario)"
+          (click)="comentar(comentario.comentario)"
           [disabled]="!formComentario.form.valid"               
         > Salvar
         </button>
@@ -41,13 +41,11 @@
 
 <table class="table table-striped table-bordered table-hover">
     <tr>
-      <th class="text-rigth">Comentarios</th>
-      <th></th>
-      <th></th>
+      <th class="text-rigth">Comentarios</th>      
     </tr>
-    <tr *ngFor="let comentario of comentarios; index as i" [attr.data-index]="i">
+    <tr *ngFor="let comentario of comentarios">
       <td class="table-active text-rigth">
-        {{ comentario }}
+        {{ comentario.comentario }}
       </td>      
     </tr>
 </table>

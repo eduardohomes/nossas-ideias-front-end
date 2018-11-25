@@ -1,3 +1,4 @@
 export * from './tarefa.model';
 export * from './tarefa.service';
-export * from './tarefa-concluida.directive';
+export * from './usuario.model';
+export * from './voto.model';

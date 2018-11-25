@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'; 
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router'; 
 
-import { TarefaService, Tarefa } from '../shared';
+import { TarefaService, Tarefa, Voto } from '../shared';
+import { Favorita } from '../shared/favorita.model';
 
 @Component({
   selector: 'app-dashboard-tarefa',
@@ -10,30 +11,64 @@ import { TarefaService, Tarefa } from '../shared';
 })
 export class DashboardTarefaComponent implements OnInit {
 
+  votos: Voto[];
   tarefas: Tarefa[];
+  favoritas: Favorita[];
+  voto: Voto;
+  favorita: Favorita = new Favorita;
 
   constructor(private tarefaService: TarefaService,
-  	private route: ActivatedRoute,
-  	private router: Router) {}
+  	private route: ActivatedRoute) {}
 
-  ngOnInit() {
-  	this.tarefas = this.dashboardTodos();
+  ngOnInit() {    
+    this.voto = new Voto(0,"", 0);
+    this.dashboardTodosNovo();
+  }
+  
+  dashboardTodosNovo(): void {       
+    this.tarefaService.listarTodasIdeias()
+    .subscribe(tarefas => this.tarefas = tarefas); 
+  }  
+
+  somarGostou(idIdeia: number): void {          
+    this.voto.idIdeia = idIdeia;   
+    this.voto.voto = "S";
+    this.tarefaService.votar(this.voto)
+      .subscribe(voto => {
+        this.votos.push(voto);
+      });
+    alert("Voto Salvo com Sucesso");   
   }
 
-  dashboardTodos(): Tarefa[] {
-  	return this.tarefaService.listarTodos();
+  somarNaoGostou(idIdeia: number): void {          
+    this.voto.idIdeia = idIdeia;   
+    this.voto.voto = "N";
+    this.tarefaService.votar(this.voto)
+      .subscribe(voto => {
+        this.votos.push(voto);
+      });
+    alert("Voto Salvo com Sucesso");   
   }
 
-  somarGostou(id: number): void {  
-      this.tarefaService.somarGostou(id);
-      this.tarefas = this.dashboardTodos(); 
-  } 
-  somarNaoGostou(id: number): void {  
-    this.tarefaService.somarNaoGostou(id);
-    this.tarefas = this.dashboardTodos(); 
-  } 
-  marcarGostei(id: number): void {  
-    this.tarefaService.marcarGostei(id);
-    this.tarefas = this.dashboardTodos(); 
+  marcarGostei(idIdeia: number, idUSuario: number): void {          
+    this.favorita.idIdeia = idIdeia;
+    this.favorita.marcada = "S";
+    this.favorita.idUser = 1;
+    this.tarefaService.favoritar(this.favorita)
+      .subscribe(favorita => {
+        this.votos.push(favorita);
+      });
+      alert("Marcado");
   }
+  desmarcarGostei(idIdeia: number, idUSuario: number): void {          
+    this.favorita.idIdeia = idIdeia;
+    this.favorita.marcada = "S";
+    this.favorita.idUser = 1;
+    this.tarefaService.favoritar(this.favorita)
+      .subscribe(favorita => {
+        this.votos.push(favorita);
+      });
+      alert("Desmarcado");
+  }
+    
 }
