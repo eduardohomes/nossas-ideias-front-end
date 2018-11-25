@@ -40,6 +40,6 @@ export class ComentarTarefaComponent implements OnInit {
   listarTodosComentarios(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.tarefaService.listarTodosComentarios(id)
-    .subscribe(comentarios => this.comentarios = comentarios);     
+    .subscribe(comentarios => this.comentarios = comentarios);         
   }
 }

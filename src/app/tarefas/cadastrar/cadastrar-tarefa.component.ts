@@ -23,10 +23,12 @@ export class CadastrarTarefaComponent implements OnInit {
   } 
 
   cadastrar(): void {    
-    if (this.formTarefa.form.valid) {      
+    if (this.formTarefa.form.valid) {    
+      this.tarefa.situacao = "Pendente";  
       this.tarefaService.cadastrarNovaIdeia(this.tarefa)
       .subscribe(tarefa => {
-        this.tarefas.push(tarefa);
+        alert('ideia cadastrada com  sucesso')
+        this.router.navigate(['tarefas/dashboard']);
       });
     }   
   }

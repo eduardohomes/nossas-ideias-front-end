@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 
-import { TarefaService, Tarefa, Voto } from '../shared';
+import { TarefaService, Voto, Dashboard } from '../shared';
 import { Favorita } from '../shared/favorita.model';
 
 @Component({
@@ -12,7 +12,7 @@ import { Favorita } from '../shared/favorita.model';
 export class DashboardTarefaComponent implements OnInit {
 
   votos: Voto[];
-  tarefas: Tarefa[];
+  tarefas: Dashboard[];
   favoritas: Favorita[];
   voto: Voto;
   favorita: Favorita = new Favorita;
@@ -27,7 +27,9 @@ export class DashboardTarefaComponent implements OnInit {
   
   dashboardTodosNovo(): void {       
     this.tarefaService.listarTodasIdeias()
-    .subscribe(tarefas => this.tarefas = tarefas); 
+    .subscribe(tarefas => {
+      this.tarefas = tarefas
+    }); 
   }  
 
   somarGostou(idIdeia: number): void {          
@@ -52,7 +54,6 @@ export class DashboardTarefaComponent implements OnInit {
 
   marcarGostei(idIdeia: number, idUSuario: number): void {          
     this.favorita.idIdeia = idIdeia;
-    this.favorita.marcada = "S";
     this.favorita.idUser = 1;
     this.tarefaService.favoritar(this.favorita)
       .subscribe(favorita => {
@@ -62,7 +63,6 @@ export class DashboardTarefaComponent implements OnInit {
   }
   desmarcarGostei(idIdeia: number, idUSuario: number): void {          
     this.favorita.idIdeia = idIdeia;
-    this.favorita.marcada = "S";
     this.favorita.idUser = 1;
     this.tarefaService.favoritar(this.favorita)
       .subscribe(favorita => {

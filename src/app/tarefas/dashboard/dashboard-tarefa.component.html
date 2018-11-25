@@ -23,13 +23,16 @@
                     >
                     </button>                    
             </div>  
-            <ng-template [ngIf]="tarefa.favorito">
+            <ng-template [ngIf]="tarefa.marcada">
                 <div class="col-md-2">   
-                    <button class="glyphicon glyphicon-star">
+                    <button class="glyphicon glyphicon-star"
+                    type="submit"                        
+                    [id]="tarefa"
+                    (click)="desmarcarGostei(tarefa.id)">
                     </button>            
                 </div> 
             </ng-template>
-            <ng-template [ngIf]="!tarefa.favorito">
+            <ng-template [ngIf]="!tarefa.marcada">
                 <div class="col-md-2">
                     <button                         
                     class="glyphicon glyphicon-star-empty"
@@ -47,22 +50,6 @@
             </button>                                                                     
         </div> 
           </div>
-       </div>
-    </div>
- </div>
- <div class="container">
-    <div class="row">
-       <h3>Lista de Favorito</h3>
-       <div *ngFor="let tarefa of tarefas" class="col-md-4">
-          <ng-template [ngIf]="tarefa.favorito">
-             <div class="card-content">
-                <div class="card-desc">
-                   <h3>{{ tarefa.nome }}</h3>
-                   <h3>{{ tarefa.situacao }}</h3>
-                   <p>{{ tarefa.descricao }}</p>
-                </div>
-             </div>
-          </ng-template>
        </div>
     </div>
  </div>

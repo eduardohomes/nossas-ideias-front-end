@@ -31,11 +31,8 @@ export class TarefaService {
   	return this.httpClient.post(this.urlLogin, credentials);
   }
 
-  listarTodasIdeias (): Observable<any> {
-    return this.httpClient.get<any>(this.urlIdeias)
-      .pipe(
-        map(data => data['content'])        
-      );
+  listarTodasIdeias (): Observable<any> {    
+    return this.httpClient.get<any>(this.urlIdeias);
   } 
 
   listarTodosComentarios (id: number): Observable<any> {
@@ -65,6 +62,6 @@ export class TarefaService {
   }
 
   favoritar (favorita: Favorita): Observable<Favorita> {       
-    return this.httpClient.post<Voto>(this.urlFavorita, favorita);
+    return this.httpClient.post<Favorita>(this.urlFavorita, favorita);
   }
 }
