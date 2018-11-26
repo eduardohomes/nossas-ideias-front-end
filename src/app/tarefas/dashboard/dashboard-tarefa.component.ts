@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 
-import { TarefaService, Voto, Dashboard } from '../shared';
+import { TarefaService, Voto, Dashboard, Usuario } from '../shared';
 import { Favorita } from '../shared/favorita.model';
 
 @Component({
@@ -12,10 +12,11 @@ import { Favorita } from '../shared/favorita.model';
 export class DashboardTarefaComponent implements OnInit {
 
   votos: Voto[];
-  tarefas: Dashboard[];
+  dashboards: Dashboard[];
   favoritas: Favorita[];
   voto: Voto;
   favorita: Favorita = new Favorita;
+  credentials = {username: ''};
 
   constructor(private tarefaService: TarefaService,
   	private route: ActivatedRoute) {}
@@ -26,10 +27,9 @@ export class DashboardTarefaComponent implements OnInit {
   }
   
   dashboardTodosNovo(): void {       
-    this.tarefaService.listarTodasIdeias()
-    .subscribe(tarefas => {
-      this.tarefas = tarefas
-    }); 
+    this.credentials.username = "admin";
+    this.tarefaService.listarTodasIdeiasDashboard(this.credentials)
+    .subscribe(dashboards => this.dashboards = dashboards);  
   }  
 
   somarGostou(idIdeia: number): void {          

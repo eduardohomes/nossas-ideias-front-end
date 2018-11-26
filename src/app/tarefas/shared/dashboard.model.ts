@@ -1,11 +1,12 @@
 export class Dashboard {
 
 	constructor(
-		public id?: number,
-		public ativa?: string,
-		public comentario_avaliador?: string,
-		public descricao?: string,
-		public nome?: string,
 		public situacao?: string,
-		public marcada?: string) {}
+		public comentarioAvaliador?: string,
+		public nome?: string,
+		public id?: number,
+		public marcada?: string,
+		public ativa?: string,
+		public descricao?: string		
+		) {}
 }

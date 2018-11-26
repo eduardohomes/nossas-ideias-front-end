@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Tarefa, Voto } from './';
+import { Tarefa, Voto, Dashboard } from './';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -35,13 +35,17 @@ export class TarefaService {
     return this.httpClient.get<any>(this.urlIdeias);
   } 
 
+  listarTodasIdeiasDashboard(credentials): Observable<any> {        
+  	return this.httpClient.post<any>(this.urlIdeias, credentials);
+  }
+
   listarTodosComentarios (id: number): Observable<any> {
     const url = `${this.urlComentarios}/${id}`;        
     return this.httpClient.get<any>(url);
   }
 
   cadastrarNovaIdeia(tarefa: Tarefa): Observable<Tarefa> {        
-  	return this.httpClient.post<Tarefa>(this.urlIdeias, tarefa);
+  	return this.httpClient.put<Tarefa>(this.urlIdeias, tarefa);
   }
 
   cadastrarComentarioIdeia(id: number, comentario: Comentario): Observable<Comentario> {   

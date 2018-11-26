@@ -29,7 +29,7 @@ export class CadastrarTarefaComponent implements OnInit {
       .subscribe(tarefa => {
         alert('ideia cadastrada com  sucesso')
         this.router.navigate(['tarefas/dashboard']);
-      });
+      }); 
     }   
   }
 }

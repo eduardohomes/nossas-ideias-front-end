@@ -1,50 +1,50 @@
 <div class="jumbotron">
     <div class="container">
        <h2>Lista de Ideias</h2>
-       <div *ngFor="let tarefa of tarefas" class="col-md-4">
-          <div *ngIf="tarefa.situacao != 'Pendente'" class="card-content">
+       <div *ngFor="let dashboard of dashboards" class="col-md-4">
+          <div *ngIf="dashboard.situacao != 'Pendente'" class="card-content">
              <div class="card-desc">
-                <h3>{{ tarefa.nome }}</h3>
-                <h5>{{ tarefa.situacao }}</h5>
-                <p>{{ tarefa.descricao }}</p>
+                <h3>{{ dashboard.nome }}</h3>
+                <h5>{{ dashboard.situacao }}</h5>
+                <p>{{ dashboard.descricao }}</p>
              </div>
              <div class="col-md-2">  
                 <button class="glyphicon glyphicon-thumbs-up"                        
                     type="submit"                 
-                    [id]="tarefa"
-                    (click)="somarGostou(tarefa.id)"                >
+                    [id]="dashboard"
+                    (click)="somarGostou(dashboard.id)"                >
                 </button>                
             </div>   
             <div class="col-md-2">  
                     <button class="glyphicon glyphicon-thumbs-down"
                         type="submit"                        
-                        [id]="tarefa"
-                        (click)="somarNaoGostou(tarefa.id)"                        
+                        [id]="dashboard"
+                        (click)="somarNaoGostou(dashboard.id)"                        
                     >
                     </button>                    
             </div>  
-            <ng-template [ngIf]="tarefa.marcada">
+            <ng-template [ngIf]="dashboard.marcada">
                 <div class="col-md-2">   
                     <button class="glyphicon glyphicon-star"
                     type="submit"                        
-                    [id]="tarefa"
-                    (click)="desmarcarGostei(tarefa.id)">
+                    [id]="dashboard"
+                    (click)="desmarcarGostei(dashboard.id)">
                     </button>            
                 </div> 
             </ng-template>
-            <ng-template [ngIf]="!tarefa.marcada">
+            <ng-template [ngIf]="!dashboard.marcada">
                 <div class="col-md-2">
                     <button                         
                     class="glyphicon glyphicon-star-empty"
                     type="submit"                        
-                    [id]="tarefa"
-                    (click)="marcarGostei(tarefa.id)"                        
+                    [id]="dashboard"
+                    (click)="marcarGostei(dashboard.id)"                        
                     >
                     </button> 
                 </div>
             </ng-template>
              <div class="col-md-2"> 
-                <button [routerLink]="['/tarefas/comentar/'+tarefa.id]"
+                <button [routerLink]="['/dashboards/comentar/'+dashboard.id]"
                     class="glyphicon glyphicon-comment"                                                    
                 >
             </button>                                                                     
