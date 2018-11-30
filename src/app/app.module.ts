@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TarefasModule } from './tarefas';
+import { IdeiasModule } from './ideias';
 
 @NgModule({
   declarations: [
@@ -16,9 +16,9 @@ import { TarefasModule } from './tarefas';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    TarefasModule
+    IdeiasModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

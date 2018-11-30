@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TarefaRoutes } from './tarefas';
+import { IdeiaRoutes } from './ideias';
 
 export const routes: Routes = [
 	{ 
 		path: '', 
-		redirectTo: '/tarefas/logar', 
+		redirectTo: '/ideias/login', 
 		pathMatch: 'full' 
 	},
-	...TarefaRoutes,	
+	...IdeiaRoutes,	
 ];
 
 @NgModule({
