@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 
-import { IdeiaService, Voto, Dashboard, Usuario } from '../shared';
+import { IdeiaService, Voto, Dashboard, Usuario, Ideia } from '../shared';
 import { Favorita } from '../shared/favorita.model';
 
 @Component({
@@ -11,11 +11,10 @@ import { Favorita } from '../shared/favorita.model';
 })
 export class DashboardIdeiaComponent implements OnInit {
 
-  votos: Voto[];
-  dashboards: Dashboard[];
-  favoritas: Favorita[];
+  usuario: Usuario; 
   voto: Voto;
-  favorita: Favorita = new Favorita;
+  votos: Voto [];
+  favorita: Favorita;
   credentials = {username: ''};
 
   constructor(private ideiaService: IdeiaService,
@@ -23,13 +22,25 @@ export class DashboardIdeiaComponent implements OnInit {
 
   ngOnInit() {    
     this.voto = new Voto(0,"", 0);
-    this.dashboardTodosNovo();
+    this.listaEmAltas();
+    this.listaFavoritas();
+    this.listaUltimasIdeias();
   }
   
-  dashboardTodosNovo(): void {           
-    this.ideiaService.listarTodasIdeias()
-    .subscribe(dashboards => this.dashboards = dashboards);  
+  listaEmAltas(): void {           
+    this.ideiaService.listaEmAlta()
+    .subscribe(listaEmAltas => this.listaEmAltas = listaEmAltas);  
   }  
+
+  listaUltimasIdeias(): void {           
+    this.ideiaService.listaUltimasIdeias()
+    .subscribe(listaUltimasIdeias => this.listaUltimasIdeias = listaUltimasIdeias);  
+  } 
+
+  listaFavoritas(): void {           
+    this.ideiaService.listaFavoritas()
+    .subscribe(listaFavoritas => this.listaFavoritas = listaFavoritas);  
+  } 
 
   somarGostou(idIdeia: number): void {          
     this.voto.idIdeia = idIdeia;   

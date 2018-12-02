@@ -11,9 +11,12 @@ import { Favorita } from './favorita.model';
 @Injectable()
 export class IdeiaService {  
 
-  private urlIdeias = "http://localhost:8080/api/ideias";      
+  private urlIdeias = "http://localhost:8080/api/ideias";
+  private urlListaEmAlta = "http://localhost:8080/api/ideias/listaEmAlta";
+  private urlListaUltimasIdeias = "http://localhost:8080/api/ideias/listaUltimasIdeias";
+  private urlListaFavoritas = "http://localhost:8080/api/ideias/listaFavoritas";      
   private urlComentarios = "http://localhost:8080/api/comentarios";      
-  private urlVotos = "http://localhost:8080/api/votos";      
+  private urlVotos = "http://lcalhost:8080/api/votos";      
   private urlLogin = "http://localhost:8080/api/user";      
   private urlFavorita = "http://localhost:8080/api/favoritas";
   
@@ -22,6 +25,8 @@ export class IdeiaService {
   usuario: Usuario; 
   comentario: Comentario; 
   comentarios: Comentario[];
+  favorita: Favorita;
+  voto: Voto;
   token = "";
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -35,10 +40,18 @@ export class IdeiaService {
     return this.http.post(this.urlLogin, credentials);    
   }
 
-  listarTodasIdeias (): Observable<any> {    
-    return this.http.get<any>(this.urlIdeias);
+  listaEmAlta (): Observable<any> {    
+    return this.http.get<any>(this.urlListaEmAlta);
+  } 
+
+  listaUltimasIdeias (): Observable<any> {    
+    return this.http.get<any>(this.urlListaUltimasIdeias);
   } 
   
+  listaFavoritas (): Observable<any> {    
+    return this.http.get<any>(this.urlListaFavoritas);
+  } 
+
   listarTodosComentarios (id: number): Observable<any> {
     const url = `${this.urlComentarios}/${id}`;        
     return this.http.get<any>(url);

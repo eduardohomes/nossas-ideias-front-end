@@ -14,12 +14,6 @@ export class ListarIdeiaComponent implements OnInit {
   constructor(private ideiaService: IdeiaService) {}
 
   ngOnInit() {
-    this.listarTodosNovo();
-  }
-
-  listarTodosNovo(): void {
-    this.ideiaService.listarTodasIdeias()
-    .subscribe(ideias => this.ideias = ideias);     
   }
 
 }

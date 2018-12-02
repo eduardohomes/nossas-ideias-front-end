@@ -1,55 +1,7 @@
-<div class="jumbotron">
-    <div class="container">
-       <h2>Lista de Ideias</h2>
-       <div *ngFor="let dashboard of dashboards" class="col-md-4">
-          <div *ngIf="dashboard.situacao != 'Pendente'" class="card-content">
-             <div class="card-desc">
-                <h3>{{ dashboard.nome }}</h3>
-                <h5>{{ dashboard.situacao }}</h5>
-                <p>{{ dashboard.descricao }}</p>
-             </div>
-             <div class="col-md-2">  
-                <button class="glyphicon glyphicon-thumbs-up"                        
-                    type="submit"                 
-                    [id]="dashboard"
-                    (click)="somarGostou(dashboard.id)"                >
-                </button>                
-            </div>   
-            <div class="col-md-2">  
-                    <button class="glyphicon glyphicon-thumbs-down"
-                        type="submit"                        
-                        [id]="dashboard"
-                        (click)="somarNaoGostou(dashboard.id)"                        
-                    >
-                    </button>                    
-            </div>  
-            <ng-template [ngIf]="dashboard.marcada">
-                <div class="col-md-2">   
-                    <button class="glyphicon glyphicon-star"
-                    type="submit"                        
-                    [id]="dashboard"
-                    (click)="desmarcarGostei(dashboard.id)">
-                    </button>            
-                </div> 
-            </ng-template>
-            <ng-template [ngIf]="!dashboard.marcada">
-                <div class="col-md-2">
-                    <button                         
-                    class="glyphicon glyphicon-star-empty"
-                    type="submit"                        
-                    [id]="dashboard"
-                    (click)="marcarGostei(dashboard.id)"                        
-                    >
-                    </button> 
-                </div>
-            </ng-template>
-             <div class="col-md-2"> 
-                <button [routerLink]="['/dashboards/comentar/'+dashboard.id]"
-                    class="glyphicon glyphicon-comment"                                                    
-                >
-            </button>                                                                     
-        </div> 
-          </div>
-       </div>
-    </div>
- </div>
+<main role="main" class="container">
+  <div class="jumbotron">
+    <h1>Navbar example</h1>
+    <p class="lead">This example is a quick exercise to illustrate how the top-aligned navbar works. As you scroll, this navbar remains in its original position and moves with the rest of the page.</p>
+    <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">View navbar docs »</a>
+  </div>
+</main>
