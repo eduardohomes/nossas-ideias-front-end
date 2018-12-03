@@ -6,11 +6,14 @@ import { EditarIdeiaComponent } from './editar';
 import { ComentarIdeiaComponent } from './comentar';
 import { LogarIdeiaComponent } from './logar';
 import { DashboardIdeiaComponent } from './dashboard';
+import { LoginComponent } from './login/login.component';
+import { ModalSucessoComponent } from './modal';
+import { PesquisarIdeiaComponent } from './pesquisa';
 
 export const IdeiaRoutes: Routes = [
 	{ 
 		path: 'ideias', 
-		redirectTo: 'ideias/login' 
+		redirectTo: 'ideias/login'
 	},	
 	{ 
 		path: 'ideias/dashboard', 
@@ -34,6 +37,14 @@ export const IdeiaRoutes: Routes = [
 	},
 	{ 
 		path: 'ideias/login', 
-		component: LogarIdeiaComponent
-	}	
+		component: LoginComponent
+	},
+	{ 
+		path: 'ideias/modal', 
+		component: ModalSucessoComponent
+	},
+	{ 
+		path: 'ideias/pesquisa', 
+		component: PesquisarIdeiaComponent
+	}
 ];

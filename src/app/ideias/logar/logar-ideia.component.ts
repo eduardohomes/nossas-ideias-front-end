@@ -11,13 +11,11 @@ import { Router } from '@angular/router';
 })
 export class LogarIdeiaComponent implements OnInit {
 
-  constructor(private ideiaService: IdeiaService, private router: Router) {}
-  
+  constructor(private ideiaService: IdeiaService, private router: Router) {}  
 
   @ViewChild('formUsuario') formUsuario: NgForm;
   usuario: Usuario;
   credentials = {username: '', password: ''};
-  cookieValue = 'UNKNOWN';
  
   ngOnInit(): void { }
 
@@ -25,9 +23,8 @@ export class LogarIdeiaComponent implements OnInit {
     this.ideiaService.authenticate(this.credentials)
       .subscribe(usuario => {        
         this.usuario = usuario,
-        console.log(this.usuario.token);        
         sessionStorage['token'] = JSON.stringify(this.usuario.token);        
-        //this.router.navigate(["/ideias/dashboard"])
+        this.router.navigate(["/ideias/dashboard"])
       });
   }  
 }

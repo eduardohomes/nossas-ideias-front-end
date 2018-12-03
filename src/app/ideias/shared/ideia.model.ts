@@ -6,5 +6,6 @@ export class Ideia {
 		public comentario_avaliador?: string,
 		public descricao?: string,
 		public nome?: string,
-		public situacao?: string) {}	
+		public situacao?: string,
+		public idCategoria?: number) {}	
 }

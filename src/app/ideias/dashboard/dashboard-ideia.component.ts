@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { Router } from '@angular/router'; 
 
-import { IdeiaService, Voto, Dashboard, Usuario, Ideia } from '../shared';
+import { IdeiaService, Voto, Usuario, Ideia } from '../shared';
 import { Favorita } from '../shared/favorita.model';
+import { Categoria } from '../shared/categoria.model';
 
 @Component({
   selector: 'app-dashboard-ideia',
@@ -12,37 +13,82 @@ import { Favorita } from '../shared/favorita.model';
 export class DashboardIdeiaComponent implements OnInit {
 
   usuario: Usuario; 
-  voto: Voto;
-  votos: Voto [];
-  favorita: Favorita;
+  listcategorias: Categoria[] = [];
+  ideiasEmAlta: Ideia[] = [];
+  ultimasIdeias: Ideia[] = [];
+  listFavoritas: Ideia [] = [];  
+  votos: Voto [] = [];
+  voto: Voto = new Voto();
+  listVotos: Voto [] = [];
+  favorita: Favorita = new Favorita();
   credentials = {username: ''};
+  ideia: Ideia = new Ideia();
+  idCategoria: number;
+  
 
   constructor(private ideiaService: IdeiaService,
-  	private route: ActivatedRoute) {}
+    private router: Router)
+     {}
 
   ngOnInit() {    
-    this.voto = new Voto(0,"", 0);
     this.listaEmAltas();
+    this.listaUltimasIdeias();   
     this.listaFavoritas();
-    this.listaUltimasIdeias();
+    this.listaPorCategorias();
   }
+
+  pesquisarIdeia(event) {
+    event.preventDefault()
+    const target = event.target
+    const nomeIdeia = target.querySelector('#nome').value
+    const selectd = target.querySelector("#categorias").selectedIndex
+    switch(selectd) {                  
+        case 1: 
+          this.idCategoria = 1;
+          break;
+        case 2: 
+          this.idCategoria = 2;
+          break;
+        case 3: 
+          this.idCategoria = 3;
+          break;
+        case 4: 
+          this.idCategoria = 5;
+          break;
+        default:
+          alert("Categoria Invalida");
+          this.router.navigate(['ideias/dashboard']);          
+    }
+    this.ideia.nome = nomeIdeia;
+    this.ideia.idCategoria = this.idCategoria;  
+    this.ideiaService.buscaPorCategoria(this.ideia)
+      .subscribe(ideia => {
+        alert('Lista de Ideias')
+        this.router.navigate(['/ideia/pesquisa', ideia]);
+      }); 
+  }     
   
+  listaPorCategorias(): void{
+    this.ideiaService.listarPorCategoria()
+    .subscribe(listcategorias => this.listcategorias = listcategorias);   
+  }
+
   listaEmAltas(): void {           
     this.ideiaService.listaEmAlta()
-    .subscribe(listaEmAltas => this.listaEmAltas = listaEmAltas);  
+    .subscribe(ideiasEmAlta => this.ideiasEmAlta = ideiasEmAlta);  
+  }  
+
+  listaFavoritas(): void {           
+    this.ideiaService.listaFavoritas()
+    .subscribe(listFavoritas => this.listFavoritas = listFavoritas);  
   }  
 
   listaUltimasIdeias(): void {           
     this.ideiaService.listaUltimasIdeias()
-    .subscribe(listaUltimasIdeias => this.listaUltimasIdeias = listaUltimasIdeias);  
+    .subscribe(ultimasIdeias => this.ultimasIdeias = ultimasIdeias);  
   } 
-
-  listaFavoritas(): void {           
-    this.ideiaService.listaFavoritas()
-    .subscribe(listaFavoritas => this.listaFavoritas = listaFavoritas);  
-  } 
-
-  somarGostou(idIdeia: number): void {          
+ 
+  somarGostou(idIdeia: number): void {    
     this.voto.idIdeia = idIdeia;   
     this.voto.voto = "S";
     this.ideiaService.votar(this.voto)
@@ -62,24 +108,18 @@ export class DashboardIdeiaComponent implements OnInit {
     alert("Voto Salvo com Sucesso");   
   }
 
-  marcarGostei(idIdeia: number, idUSuario: number): void {          
-    this.favorita.idIdeia = idIdeia;
-    this.favorita.idUser = 1;
-    this.ideiaService.favoritar(this.favorita)
-      .subscribe(favorita => {
-        this.votos.push(favorita);
+  favoritar(idIdeia: number) {
+    this.favorita.idIdeia = idIdeia;   
+    this.ideiaService.votar(this.voto)
+      .subscribe(voto => {
+        this.votos.push(voto);
       });
-      alert("Marcado");
+    alert("Voto Salvo com Sucesso");   
+  }  
+
+  listaVotos(): void{
+    this.ideiaService.listaVotos()
+    .subscribe(listVotos => this.listVotos = listVotos);   
   }
-  
-  desmarcarGostei(idIdeia: number, idUSuario: number): void {          
-    this.favorita.idIdeia = idIdeia;
-    this.favorita.idUser = 1;
-    this.ideiaService.favoritar(this.favorita)
-      .subscribe(favorita => {
-        this.votos.push(favorita);
-      });
-      alert("Desmarcado");
-  }
-    
+
 }

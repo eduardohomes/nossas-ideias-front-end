@@ -7,6 +7,7 @@ import { Comentario } from './comentario.model';
 import { Usuario } from './usuario.model';
 import { Router } from '@angular/router';
 import { Favorita } from './favorita.model';
+import { Categoria } from './categoria.model';
 
 @Injectable()
 export class IdeiaService {  
@@ -15,70 +16,103 @@ export class IdeiaService {
   private urlListaEmAlta = "http://localhost:8080/api/ideias/listaEmAlta";
   private urlListaUltimasIdeias = "http://localhost:8080/api/ideias/listaUltimasIdeias";
   private urlListaFavoritas = "http://localhost:8080/api/ideias/listaFavoritas";      
+  private urlBuscaPorCategoria = "http://localhost:8080/api/ideias/buscaPorCategoria";      
   private urlComentarios = "http://localhost:8080/api/comentarios";      
-  private urlVotos = "http://lcalhost:8080/api/votos";      
-  private urlLogin = "http://localhost:8080/api/user";      
+  private urlVotos = "http://localhost:8080/api/votos";      
+  private urlListaPorCategoria = "http://localhost:8080/api/ideias/listaPorCategoria";      
+  private urlLogin = "http://localhost:8080/api/login";      
   private urlFavorita = "http://localhost:8080/api/favoritas";
   
   ideias: Ideia[];
-  ideia: Ideia; 
+  categorias: Categoria[];
+  ideia: Ideia = new Ideia(); 
   usuario: Usuario; 
   comentario: Comentario; 
   comentarios: Comentario[];
   favorita: Favorita;
   voto: Voto;
-  token = "";
+  token: String;
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': '$2a$10$vW6LdCdJiEGFGgqenKsMDeTnh44DhmOpjb2PHBNr4dEsJqbJvMhg6'
+    })
+  };
 
   constructor(private http: HttpClient, private router: Router) { }
   authenticated = false;
 
   buscaToken() {
-    this.token = localStorage.getItem('token').toString();
+    this.token = sessionStorage.getItem('token');
   }
 
   authenticate(credentials) {        
     return this.http.post(this.urlLogin, credentials);    
   }
 
+  listaVotos(): Observable<any> {
+    this.buscaToken();
+    return this.http.get<any>(this.urlVotos, this.httpOptions );
+  }
+
+  listarPorCategoria(): Observable<any> {
+    this.buscaToken();
+    return this.http.get<any>(this.urlListaPorCategoria, this.httpOptions );
+  }
+
   listaEmAlta (): Observable<any> {    
-    return this.http.get<any>(this.urlListaEmAlta);
+    this.buscaToken();
+    return this.http.get<any>(this.urlListaEmAlta, this.httpOptions);
   } 
 
   listaUltimasIdeias (): Observable<any> {    
-    return this.http.get<any>(this.urlListaUltimasIdeias);
+    this.buscaToken();
+    return this.http.get<any>(this.urlListaUltimasIdeias, this.httpOptions);
   } 
   
-  listaFavoritas (): Observable<any> {    
-    return this.http.get<any>(this.urlListaFavoritas);
+  listaFavoritas (): Observable<any> { 
+    this.buscaToken();   
+    return this.http.get<any>(this.urlListaFavoritas, this.httpOptions);
   } 
 
   listarTodosComentarios (id: number): Observable<any> {
+    this.buscaToken();   
     const url = `${this.urlComentarios}/${id}`;        
-    return this.http.get<any>(url);
+    return this.http.get<any>(url,this.httpOptions);
   }
 
   cadastrarNovaIdeia(ideia: Ideia): Observable<Ideia> {        
-  	return this.http.put<Ideia>(this.urlIdeias, ideia);
+    this.buscaToken();
+  	return this.http.post<Ideia>(this.urlIdeias, ideia, this.httpOptions);
   }
 
-  cadastrarComentarioIdeia(id: number, comentario: Comentario): Observable<Comentario> {   
-    return this.http.post<Comentario>(this.urlComentarios, comentario);
+  cadastrarComentarioIdeia(comentario: Comentario): Observable<Comentario> {   
+    this.buscaToken();
+    return this.http.post<Comentario>(this.urlComentarios, comentario, this.httpOptions);
   }
 
   buscarIdeiaId(id: number): Observable<any> {
+    this.buscaToken();
     const url = `${this.urlIdeias}/${id}`;
-    return this.http.get<any>(url);
+    return this.http.get<any>(url, this.httpOptions);
   }
 
   atualizarIdeia (ideia: Ideia): Observable<any> {
-    return this.http.put(this.urlIdeias, ideia);
+    this.buscaToken();
+    return this.http.put(this.urlIdeias, ideia, this.httpOptions);
   }
 
   votar (voto: Voto): Observable<Voto> {       
-    return this.http.post<Voto>(this.urlVotos, voto);
+    this.buscaToken();
+    return this.http.post<Voto>(this.urlVotos, voto, this.httpOptions);
   }
 
   favoritar (favorita: Favorita): Observable<Favorita> {       
     return this.http.post<Favorita>(this.urlFavorita, favorita);
+  }
+
+  buscaPorCategoria (ideia: Ideia): Observable<any> {       
+    return this.http.put<Ideia>(this.urlBuscaPorCategoria, ideia, this.httpOptions);
   }
 }

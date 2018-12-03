@@ -3,29 +3,35 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms'; 
 
 import { IdeiaService, Ideia } from '../shared';
+import { Categoria } from '../shared/categoria.model';
 
 @Component({
   selector: 'app-cadastrar-ideia',
   templateUrl: './cadastrar-ideia.component.html',
-  styleUrls: ['./cadastrar-ideia.component.css']
+  styleUrls: ['./cadastrar-ideia.component.css'],
+  
 })
 export class CadastrarIdeiaComponent implements OnInit {
 
   @ViewChild('formIdeia') formIdeia: NgForm;
-  ideias: Ideia[];
-  ideia: Ideia;
+  ideias: Ideia[] = [];
+  categorias: Categoria[] = [];
+  ideia: Ideia = new Ideia();
 
   constructor(private ideiaService: IdeiaService,
   	private router: Router) { }
 
   ngOnInit() {  
-    this.ideia = new Ideia(0, "", "", "", "","");	    
+    this.listaCategorias();   
   } 
 
   cadastrar(): void {    
-    if (this.formIdeia.form.valid) {    
-      var isAdmin = localStorage.getItem("isAdmin");
-      if (isAdmin) {
+    if (this.formIdeia.form.valid) { 
+      this.ideia.comentario_avaliador = "";
+      this.ideia.idCategoria =  1;
+      this.ideia.ativa = "S";
+      var isAdmin = sessionStorage.getItem("user");
+      if (isAdmin== "1") {
         this.ideia.situacao = "Em Execução";
       } else {
         this.ideia.situacao = "Aberta";
@@ -36,5 +42,9 @@ export class CadastrarIdeiaComponent implements OnInit {
         this.router.navigate(['ideias/dashboard']);
       }); 
     }   
+  }
+  listaCategorias(): void{
+    this.ideiaService.listarCategoria()
+    .subscribe(categorias => this.categorias = categorias);   
   }
 }
