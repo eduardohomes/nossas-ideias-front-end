@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; 
+import { ActivatedRoute, Router } from '@angular/router'; 
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms'; 
 
@@ -13,12 +13,13 @@ import { IdeiaService, Ideia } from '../shared';
 export class EditarIdeiaComponent implements OnInit {
 
   @ViewChild('formIdeia') formIdeia: NgForm;
-  ideia: Ideia;
-  ideias: Ideia[]; 
+  ideia: Ideia = new Ideia();
+  ideias: Ideia[] = [];   
   
   constructor(
     private ideiaService: IdeiaService,
-  	private route: ActivatedRoute,
+    private route: ActivatedRoute,
+    private  router: Router,
   	private location: Location) {}
 
   ngOnInit() {       
@@ -28,15 +29,23 @@ export class EditarIdeiaComponent implements OnInit {
   buscarPorId(): void {
     const id = +this.route.snapshot.paramMap.get('id');
     this.ideiaService.buscarIdeiaId(id)
-      .subscribe(ideia => this.ideia = ideia);
+      .subscribe(ideias => this.ideia = ideias);
   }
 
   voltar(): void {
     this.location.back();
   }
 
-  atualizar(): void {
-    this.ideiaService.atualizarIdeia(this.ideia )
-      .subscribe(() => this.voltar());
-  }  
+  loginUser(event) {
+    event.preventDefault()
+    const target = event.target
+    this.ideia.nome = target.querySelector('#nome').value
+    this.ideia.descricao = target.querySelector('#descricao').value
+    this.ideia.comentario_Avaliador = target.querySelector('#comentario').value
+    this.ideia.situacao = target.querySelector("#situacao").value
+    this.ideiaService.atualizarIdeia(this.ideia).subscribe(() => this.voltar());    
+    alert("Ideia Atualizada");
+    this.router.navigate(['/ideias/dashboard', this.ideia]);
+  }
+ 
 }

@@ -9,11 +9,17 @@ import { IdeiaService, Ideia } from '../shared';
 })
 export class ListarIdeiaComponent implements OnInit {
 
-  ideias: Ideia[];
+  ideias: Ideia[] = [];
 
   constructor(private ideiaService: IdeiaService) {}
 
   ngOnInit() {
+    this.listaUltimasIdeias();
   }
+
+  listaUltimasIdeias(): void {           
+    this.ideiaService.listarPendenteAvaliacao()
+    .subscribe(ideias => this.ideias = ideias);  
+  } 
 
 }

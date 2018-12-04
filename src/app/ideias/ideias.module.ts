@@ -13,8 +13,8 @@ import { LogarIdeiaComponent } from './logar';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PesquisarIdeiaComponent } from './pesquisar';
 import { ModalSucessoComponent } from './modal';
-import { PesquisarIdeiaComponent } from './pesquisa';
 
 @NgModule({
   imports: [

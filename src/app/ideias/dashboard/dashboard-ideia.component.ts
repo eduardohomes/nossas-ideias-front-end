@@ -12,15 +12,15 @@ import { Categoria } from '../shared/categoria.model';
 })
 export class DashboardIdeiaComponent implements OnInit {
 
-  usuario: Usuario; 
   listcategorias: Categoria[] = [];
-  ideiasEmAlta: Ideia[] = [];
-  ultimasIdeias: Ideia[] = [];
-  listFavoritas: Ideia [] = [];  
-  votos: Voto [] = [];
-  voto: Voto = new Voto();
   listVotos: Voto [] = [];
+  listFavoritas: Ideia [] = [];  
+  listUltimasCadastradas: Ideia [] = [];  
+  listEmAltas: Ideia [] = [];  
+  votos: Voto [] = [];  
+  voto: Voto = new Voto();
   favorita: Favorita = new Favorita();
+  usuario: Usuario = new Usuario(); 
   credentials = {username: ''};
   ideia: Ideia = new Ideia();
   idCategoria: number;
@@ -31,10 +31,21 @@ export class DashboardIdeiaComponent implements OnInit {
      {}
 
   ngOnInit() {    
+    this.contaVotos();
+    this.pegaUsuarioLogado();
     this.listaEmAltas();
     this.listaUltimasIdeias();   
     this.listaFavoritas();
-    this.listaPorCategorias();
+    this.listaPorCategorias();        
+  }
+
+  contaVotos(): void{
+    this.ideiaService.contaVotos()
+    .subscribe(listVotos => this.listVotos = listVotos);  
+  }
+
+  pegaUsuarioLogado() {
+    this.usuario.admin = sessionStorage.getItem('user');
   }
 
   pesquisarIdeia(event) {
@@ -61,33 +72,32 @@ export class DashboardIdeiaComponent implements OnInit {
     }
     this.ideia.nome = nomeIdeia;
     this.ideia.idCategoria = this.idCategoria;  
-    this.ideiaService.buscaPorCategoria(this.ideia)
-      .subscribe(ideia => {
-        alert('Lista de Ideias')
-        this.router.navigate(['/ideia/pesquisa', ideia]);
-      }); 
+    this.router.navigate(['/ideias/pesquisar', this.ideia]);
   }     
   
   listaPorCategorias(): void{
     this.ideiaService.listarPorCategoria()
-    .subscribe(listcategorias => this.listcategorias = listcategorias);   
+    .subscribe(listcategorias => this.listcategorias = listcategorias);  
   }
 
   listaEmAltas(): void {           
     this.ideiaService.listaEmAlta()
-    .subscribe(ideiasEmAlta => this.ideiasEmAlta = ideiasEmAlta);  
-  }  
+    .subscribe(listEmAlta => this.listEmAltas = listEmAlta);  
+  } 
+  
+  listaUltimasIdeias(): void {           
+    this.ideiaService.listaUltimasIdeias()
+    .subscribe(listUltimasCadastrada => this.listUltimasCadastradas = listUltimasCadastrada);
+  } 
 
   listaFavoritas(): void {           
     this.ideiaService.listaFavoritas()
-    .subscribe(listFavoritas => this.listFavoritas = listFavoritas);  
-  }  
+    .subscribe(listFavorita => {        
+      this.listFavoritas = listFavorita
+    }); 
+    
+  }
 
-  listaUltimasIdeias(): void {           
-    this.ideiaService.listaUltimasIdeias()
-    .subscribe(ultimasIdeias => this.ultimasIdeias = ultimasIdeias);  
-  } 
- 
   somarGostou(idIdeia: number): void {    
     this.voto.idIdeia = idIdeia;   
     this.voto.voto = "S";
@@ -95,7 +105,7 @@ export class DashboardIdeiaComponent implements OnInit {
       .subscribe(voto => {
         this.votos.push(voto);
       });
-    alert("Voto Salvo com Sucesso");   
+    
   }
 
   somarNaoGostou(idIdeia: number): void {          
@@ -105,21 +115,16 @@ export class DashboardIdeiaComponent implements OnInit {
       .subscribe(voto => {
         this.votos.push(voto);
       });
-    alert("Voto Salvo com Sucesso");   
   }
 
   favoritar(idIdeia: number) {
-    this.favorita.idIdeia = idIdeia;   
-    this.ideiaService.votar(this.voto)
-      .subscribe(voto => {
-        this.votos.push(voto);
-      });
-    alert("Voto Salvo com Sucesso");   
+    this.favorita.idIdeia = idIdeia;    
+    this.ideiaService.favoritar(this.favorita)
+      .subscribe(favorita => {
+        this.listFavoritas.push(favorita);
+      });    
+      alert('Ideia favoritada')
+      this.router.navigate(['ideias/dashboard']);
   }  
-
-  listaVotos(): void{
-    this.ideiaService.listaVotos()
-    .subscribe(listVotos => this.listVotos = listVotos);   
-  }
 
 }

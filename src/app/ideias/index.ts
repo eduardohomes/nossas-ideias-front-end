@@ -8,4 +8,4 @@ export * from './dashboard';
 export * from './comentar';
 export * from './logar';
 export * from './modal';
-export * from './pesquisa';
+export * from './pesquisar';

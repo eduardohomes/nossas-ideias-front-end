@@ -7,8 +7,9 @@ import { ComentarIdeiaComponent } from './comentar';
 import { LogarIdeiaComponent } from './logar';
 import { DashboardIdeiaComponent } from './dashboard';
 import { LoginComponent } from './login/login.component';
+import { PesquisarIdeiaComponent } from './pesquisar';
 import { ModalSucessoComponent } from './modal';
-import { PesquisarIdeiaComponent } from './pesquisa';
+import { LogoutComponent } from './logout/logout.component';
 
 export const IdeiaRoutes: Routes = [
 	{ 
@@ -40,11 +41,15 @@ export const IdeiaRoutes: Routes = [
 		component: LoginComponent
 	},
 	{ 
+		path: 'ideias/logout', 
+		component: LogoutComponent
+	},
+	{ 
 		path: 'ideias/modal', 
 		component: ModalSucessoComponent
 	},
 	{ 
-		path: 'ideias/pesquisa', 
+		path: 'ideias/pesquisar', 
 		component: PesquisarIdeiaComponent
 	}
 ];

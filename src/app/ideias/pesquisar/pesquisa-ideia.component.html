@@ -1,5 +1,3 @@
-<div class="container-fluid">
-
 <div class="jumbotron">
     <div class="container push-spaces">
         
@@ -20,13 +18,27 @@
         </div>
       </nav>
 </div>
-
+  <div class="container">
+    <form (submit)="pesquisar($event)" class="form-inline">
+        <div class="form-row">
+            <div class="col">
+              <label>Nome da ideia</label>
+            </div>
+            <div class="col-6">
+              <input type="text" class="form-control" placeholder="Nome da Ideia" id="nome">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+              </div>
+          </div>        
+      </form>
+  </div>
+<br>
 <table class="table table-striped table-bordered table-hover">
   <tr>
   	<th class="text-rigth">Nome da Ideia</th>
     <th class="text-rigth">Descrição da Ideia</th>
     <th class="text-rigth">Situação da Ideia</th>
-    <th></th>
   </tr>
   <tr *ngFor="let ideia of ideias">
     <td class="table-active text-rigth">
@@ -37,15 +49,7 @@
     </td>
     <td class="table-active text-rigth" style="width: 200px">
       {{ ideia.situacao }}
-    </td>
-    <td class="text-center" style="width: 100px">
-      <a [routerLink]="['/ideias/editar/'+ideia.id]"
-        title="Editar" alt="Editar"
-        class="btn btn-xs btn-info">
-        <span class="glyphicon glyphicon-pencil" 
-          aria-hidden="true"></span> Editar
-      </a>
     </td>    
   </tr>
 </table>
-</div>
+<button class='btn btn-lg '[routerLink]="['/ideias/dashboard']">Fechar</button>

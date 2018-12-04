@@ -1,75 +1,53 @@
-<h1>Editar Ideia</h1>
+<div class="container-fluid">
+  <div class="jumbotron">
+      <div class="container push-spaces">
+          
+      </div>
+  </div>
+  <div class="nav-scroller py-1 mb-2">
+      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-light bg-light">            
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" [routerLink]="['/ideias/dashboard']">
+                  <i class="fa fa-home"></i>
+                  Home
+                  <span class="sr-only">(current)</span>
+                  </a>
+              </li>
+            </ul>              
+          </div>
+        </nav>
+  </div>
 
-<div class="well">
-  <form #formIdeia="ngForm">
-    <div class="form-group">
-      <label for="nome">Nome da Ideia:</label>      
-      <input 
-        type="text"
-        class="form-control"
-        id="nome"
-        name="nome"
-        [(ngModel)]="ideia.nome"
-        #nome="ngModel"
-        minlength="5" 
-        required> 
-      <div *ngIf="nome.errors && (nome.dirty || nome.touched)"
-           class="alert alert-danger">
-        <div [hidden]="!nome.errors.required">
-          Digite a ideia.
+  <div class="container">
+      <form (submit)="loginUser($event)">
+          <div class="container">
+            <div class="form-group">
+              <label>Nome</label> 
+              <input type="text" autocomplete="off" id="nome">
+            </div>
+            <div class="form-group">
+              <label>Descrição</label> 
+              <input type="text" autocomplete="off" id="descricao">
+            </div>
+            <div class="form-group">
+                <label>Comentario Avaliador</label> 
+                <input type="textarea" autocomplete="off" id="comentario" required>
+              </div>
+            <div class="form-group">
+                <label>Situação</label>
+                <select id="situacao">
+                    <option value="Em Colaboração">Em Colaboração</option>
+                    <option value="Em Execução">Em Execução</option>
+                    <option value="Concluida">Concluida</option>
+                    <option value="Rejeitada">Rejeitada</option>
+                  </select>
+            </div> 
+          <div>
+            <button type="submit" id="submit">Submit</button>
+          </div>
         </div>
-        <div [hidden]="!nome.errors.minlength">
-          A ideia deve conter ao menos 5 caracteres.
-        </div>
-      </div>
+      </form>
     </div>
-    <div class="form-group">
-      <label for="nome">Descrição da Ideia:</label>
-      <textarea 
-        type="text"
-        class="form-control"
-        id="descricao"
-        name="descricao"
-        [(ngModel)]="ideia.descricao"
-        #descricao="ngModel"
-        minlength="5" 
-        required> </textarea>
-      <div *ngIf="descricao.errors && (descricao.dirty || descricao.touched)"
-           class="alert alert-danger">
-        <div [hidden]="!descricao.errors.required">
-          Digite a ideia.
-        </div>
-        <div [hidden]="!descricao.errors.minlength">
-          A ideia deve conter ao menos 5 caracteres.
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-        <label>Situação da Ideia</label>
-        <select class="form-control"
-          id="situacao"
-          name="situacao"
-          [(ngModel)]="ideia.situacao"
-          #situacao="ngModel"
-          required
-        >
-          <option value="Aprovada">Aprovada</option>
-          <option value="Em Andamento">Em Andamento</option>
-          <option value="Finalizada">Finalizada</option>
-        </select>
-    </div>    
-    <div class="form-group text-center">
-      <input 
-        type="submit"
-        class="btn btn-success"
-        (click)="atualizar()"
-        value="Atualizar"
-        [disabled]="!formIdeia.form.valid">
-      <a [routerLink]="['/ideias']"
-        class="btn btn-default">
-        <span class="glyphicon glyphicon-chevron-left" 
-          aria-hidden="true"></span> Voltar
-      </a>
-    </div>
-  </form>
 </div>

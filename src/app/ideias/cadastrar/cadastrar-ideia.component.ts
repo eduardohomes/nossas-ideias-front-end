@@ -27,7 +27,7 @@ export class CadastrarIdeiaComponent implements OnInit {
 
   cadastrar(): void {    
     if (this.formIdeia.form.valid) { 
-      this.ideia.comentario_avaliador = "";
+      this.ideia.comentario_Avaliador = "";
       this.ideia.idCategoria =  1;
       this.ideia.ativa = "S";
       var isAdmin = sessionStorage.getItem("user");
@@ -44,7 +44,7 @@ export class CadastrarIdeiaComponent implements OnInit {
     }   
   }
   listaCategorias(): void{
-    this.ideiaService.listarCategoria()
+    this.ideiaService.listaCategoria()
     .subscribe(categorias => this.categorias = categorias);   
   }
 }

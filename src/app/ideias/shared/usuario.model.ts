@@ -4,5 +4,6 @@ export class Usuario {
 		public id?: number,
 		public usuario?: string,
 		public token?: string,
-		public senha?: string) {}
+		public senha?: string,
+		public admin?: string) {}
 }
