@@ -4,12 +4,12 @@ import { ListarIdeiaComponent } from './listar';
 import { CadastrarIdeiaComponent } from './cadastrar';
 import { EditarIdeiaComponent } from './editar';
 import { ComentarIdeiaComponent } from './comentar';
-import { LogarIdeiaComponent } from './logar';
 import { DashboardIdeiaComponent } from './dashboard';
 import { LoginComponent } from './login/login.component';
 import { PesquisarIdeiaComponent } from './pesquisar';
 import { ModalSucessoComponent } from './modal';
 import { LogoutComponent } from './logout/logout.component';
+import { ListarPesquisaIdeiaComponent } from './listarPesquisa';
 
 export const IdeiaRoutes: Routes = [
 	{ 
@@ -51,5 +51,9 @@ export const IdeiaRoutes: Routes = [
 	{ 
 		path: 'ideias/pesquisar', 
 		component: PesquisarIdeiaComponent
-	}
+	},
+	{ 
+		path: 'ideias/listarPesquisa', 
+		component: ListarPesquisaIdeiaComponent
+	},
 ];

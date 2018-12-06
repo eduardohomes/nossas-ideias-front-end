@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Ideia, Voto } from '.';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { Ideia, Voto, Categoria, Usuario, Comentario, Favorita } from '.';
+import { HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Comentario } from './comentario.model';
-import { Usuario } from './usuario.model';
 import { Router } from '@angular/router';
-import { Favorita } from './favorita.model';
-import { Categoria } from './categoria.model';
+import { map } from 'rxjs/operators';
+
 
 @Injectable()
 export class IdeiaService {  
@@ -21,7 +19,8 @@ export class IdeiaService {
   private urlBuscaPorCategoria = "http://localhost:8080/api/ideias/buscaPorCategoria";      
   private urlBuscaPorNome = "http://localhost:8080/api/ideias/buscaPorNome";      
   private urlComentarios = "http://localhost:8080/api/comentarios";      
-  private urlVotos = "http://localhost:8080/api/votos/todos";      
+  private urlVotos = "http://localhost:8080/api/votos/";      
+  private urlVotosTodos = "http://localhost:8080/api/votos/todos";      
   private urlContaVotos = "http://localhost:8080/api/votos/contaVotos";      
   private urlListaPorCategoria = "http://localhost:8080/api/ideias/listaPorCategoria";      
   private urlCategorias = "http://localhost:8080/api/categorias";      
@@ -45,6 +44,7 @@ export class IdeiaService {
     })
   };
 
+  
   constructor(private http: HttpClient, private router: Router) { }
   authenticated = false;
 
@@ -61,7 +61,7 @@ export class IdeiaService {
   }
 
   listaVotos(): Observable<any> {
-    return this.http.get<any>(this.urlVotos, this.httpOptions );
+    return this.http.get<any>(this.urlVotosTodos, this.httpOptions );
   }
 
   listaVotosPorIdeia(idIdeia: number): Observable<any> {
@@ -75,6 +75,7 @@ export class IdeiaService {
   listaCategoria(): Observable<any> {
     return this.http.get<any>(this.urlCategorias, this.httpOptions );
   }
+  
   listaEmAlta (): Observable<any> {    
     return this.http.get<any>(this.urlListaEmAlta, this.httpOptions);
   } 
@@ -109,8 +110,8 @@ export class IdeiaService {
     return this.http.put(this.urlIdeiasAtualizar, ideia, this.httpOptions);
   }
 
-  votar (voto: Voto): Observable<any> {       
-    return this.http.post<any>(this.urlVotos, voto, this.httpOptions);    
+  votar (voto: Voto): Observable<any> {           
+    return this.http.post(this.urlVotos, voto, this.httpOptions);
   }
 
   favoritar (favorita: Favorita): Observable<Favorita> {    
@@ -122,6 +123,6 @@ export class IdeiaService {
   }
 
   buscaPorNomeIdeia (ideia: Ideia): Observable<any> {       
-    return this.http.put<Ideia>(this.urlBuscaPorNome, ideia, this.httpOptions);    
+    return this.http.put<any>(this.urlBuscaPorNome, ideia, this.httpOptions);    
   }
 }

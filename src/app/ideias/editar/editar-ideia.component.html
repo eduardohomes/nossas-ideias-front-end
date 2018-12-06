@@ -17,37 +17,94 @@
               </li>
             </ul>              
           </div>
-        </nav>
-  </div>
-
+      </nav>
+  </div> 
   <div class="container">
-      <form (submit)="loginUser($event)">
-          <div class="container">
-            <div class="form-group">
-              <label>Nome</label> 
-              <input type="text" autocomplete="off" id="nome">
-            </div>
-            <div class="form-group">
-              <label>Descrição</label> 
-              <input type="text" autocomplete="off" id="descricao">
-            </div>
-            <div class="form-group">
-                <label>Comentario Avaliador</label> 
-                <input type="textarea" autocomplete="off" id="comentario" required>
+      <div class="well">
+          <form (submit)="cadastrar($event)">
+              <div class="form-group">
+                <label for="nome">Nome da Ideia:</label>
+                <input 
+                  type="text"
+                  class="form-control"
+                  id="nome"
+                  name="nome"
+                  [(ngModel)]="ideia.nome"
+                  #nome="ngModel"
+                  minlength="5" 
+                  required> 
+                <div *ngIf="nome.errors && (nome.dirty || nome.touched)"
+                     class="alert alert-danger">
+                  <div [hidden]="!nome.errors.required">
+                    Digite a ideia.
+                  </div>
+                  <div [hidden]="!nome.errors.minlength">
+                    A ideia deve conter ao menos 5 caracteres.
+                  </div>
+                </div>
               </div>
-            <div class="form-group">
-                <label>Situação</label>
-                <select id="situacao">
-                    <option value="Em Colaboração">Em Colaboração</option>
-                    <option value="Em Execução">Em Execução</option>
-                    <option value="Concluida">Concluida</option>
-                    <option value="Rejeitada">Rejeitada</option>
-                  </select>
-            </div> 
-          <div>
-            <button type="submit" id="submit">Submit</button>
-          </div>
-        </div>
-      </form>
-    </div>
+              <div class="form-group">
+                  <label>Situacao</label>                  
+                  <select 
+                    class="form-control" 
+                    id="situacao" 
+                    name="situacao" 
+                    [(ngModel)]="ideia.situacao"
+                    #situacao="ngModel"
+                    required>
+                      <option>Em Colaboração</option>                            
+                      <option>Em Execução</option>                            
+                      <option>Concluida</option>                            
+                      <option>Rejeitada</option>
+                  </select>                    
+              </div>
+              <div class="form-group">
+                  <label for="descricao">Descrição da Ideia</label>
+                  <textarea 
+                    class="form-control" 
+                    id="descricao"
+                    name="descricao"
+                    [(ngModel)]="ideia.descricao"
+                    #descricao="ngModel"
+                    minlength="5" 
+                    required
+                    rows="3"
+                  >{{ ideia.descricao }}</textarea>
+                  <div *ngIf="descricao.errors && (nome.dirty || nome.touched)"
+                       class="alert alert-danger">
+                    <div [hidden]="!descricao.errors.required">
+                      Digite a ideia.
+                    </div>
+                    <div [hidden]="!descricao.errors.minlength">
+                      A ideia deve conter ao menos 5 caracteres.
+                    </div>
+                  </div>
+              </div> 
+              <div class="form-group">
+                    <label>Comentário do Avaliador</label>
+                    <textarea 
+                      class="form-control" 
+                      id="comentario_Avaliador"
+                      name="comentario_Avaliador"
+                      [(ngModel)]="ideia.comentario_Avaliador"
+                      #comentario_Avaliador="ngModel"
+                      minlength="5" 
+                      required
+                      rows="3"
+                    >{{ ideia.comentarioAvaliador }}</textarea>
+                    <div *ngIf="comentario_Avaliador.errors && (comentario_Avaliador.dirty || comentario_Avaliador.touched)"
+                         class="alert alert-danger">
+                      <div [hidden]="!comentario_Avaliador.errors.required">
+                        Digite a ideia.
+                      </div>
+                      <div [hidden]="!comentario_Avaliador.errors.minlength">
+                        A ideia deve conter ao menos 5 caracteres.
+                      </div>
+                    </div>
+              </div> 
+              <button [routerLink]="['/ideias/dashboard']" type="button" class="btn btn-secondary">Voltar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+          </form>
+      </div>
+  </div> 
 </div>

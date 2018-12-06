@@ -7,8 +7,9 @@
           <span aria-hidden="true">&times;</span>
           </button>
         </div>
+      <form (submit)="cadastrar($event)">
         <div class="modal-body">
-            <form #formIdeia="ngForm">
+            
               <div class="form-group">
                 <label for="nome">Nome da Ideia:</label>
                 <input 
@@ -31,10 +32,13 @@
                 </div>
               </div>
               <div class="form-group">
-                  <label for="exampleFormControlSelect1">Categoria</label>
-                  <select class="form-control" id="exampleFormControlSelect1">
-                  <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nome }}</option>                            
-                  </select>
+                  <label>Categoria</label>                  
+                  <select class="form-control" id="categoria">
+                    <option>Gestão de Pessoas</option>                            
+                    <option>Produtos</option>                            
+                    <option>Processos</option>                            
+                    <option>Suporte</option>
+                  </select>                    
                </div>
               <div class="form-group">
                   <label for="descricao">Descrição da Ideia</label>
@@ -58,18 +62,17 @@
                     </div>
                   </div>
                 </div>  
-              </form>
+             
         </div>
         <div class="modal-footer">
           <button [routerLink]="['/ideias/dashboard']" type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
           <button 
-              type="button" 
+              type="submit" 
               class="btn btn-primary"  
-              data-dismiss="modal"
-              (click)="cadastrar()"
-              value="Cadastrar"
-              [disabled]="!formIdeia.form.valid">Enviar</button>
+              >Salvar
+			    </button>
         </div>
+      </form>
       </div>
     </div>
 </div> 

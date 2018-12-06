@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
 
-import { IdeiaService, Voto, Usuario, Ideia } from '../shared';
-import { Favorita } from '../shared/favorita.model';
-import { Categoria } from '../shared/categoria.model';
+import { Favorita,Categoria, IdeiaService, Voto, Usuario, Ideia } from '../shared';
+import { first } from 'rxjs/operators';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard-ideia',
@@ -20,19 +20,17 @@ export class DashboardIdeiaComponent implements OnInit {
   votos: Voto [] = [];  
   voto: Voto = new Voto();
   favorita: Favorita = new Favorita();
-  usuario: Usuario = new Usuario(); 
-  credentials = {username: ''};
+  usuario: Usuario = new Usuario();   
   ideia: Ideia = new Ideia();
   idCategoria: number;
-  
-
+  user: string;
+      
   constructor(private ideiaService: IdeiaService,
     private router: Router)
      {}
 
-  ngOnInit() {    
-    this.contaVotos();
-    this.pegaUsuarioLogado();
+  ngOnInit() {
+    this.user = sessionStorage.getItem('user');
     this.listaEmAltas();
     this.listaUltimasIdeias();   
     this.listaFavoritas();
@@ -43,15 +41,11 @@ export class DashboardIdeiaComponent implements OnInit {
     this.ideiaService.contaVotos()
     .subscribe(listVotos => this.listVotos = listVotos);  
   }
-
-  pegaUsuarioLogado() {
-    this.usuario.admin = sessionStorage.getItem('user');
-  }
-
-  pesquisarIdeia(event) {
+  
+  buscaPorCategoria(event) {
     event.preventDefault()
     const target = event.target
-    const nomeIdeia = target.querySelector('#nome').value
+    const nomeIdeia = target.querySelector('#campoBusca').value
     const selectd = target.querySelector("#categorias").selectedIndex
     switch(selectd) {                  
         case 1: 
@@ -71,8 +65,8 @@ export class DashboardIdeiaComponent implements OnInit {
           this.router.navigate(['ideias/dashboard']);          
     }
     this.ideia.nome = nomeIdeia;
-    this.ideia.idCategoria = this.idCategoria;  
-    this.router.navigate(['/ideias/pesquisar', this.ideia]);
+    this.ideia.idCategoria = this.idCategoria;       
+    this.router.navigate(['/ideias/listarPesquisa', this.ideia]);
   }     
   
   listaPorCategorias(): void{
@@ -103,9 +97,8 @@ export class DashboardIdeiaComponent implements OnInit {
     this.voto.voto = "S";
     this.ideiaService.votar(this.voto)
       .subscribe(voto => {
-        this.votos.push(voto);
-      });
-    
+        this.votos.push(voto);        
+    });       
   }
 
   somarNaoGostou(idIdeia: number): void {          
@@ -122,9 +115,8 @@ export class DashboardIdeiaComponent implements OnInit {
     this.ideiaService.favoritar(this.favorita)
       .subscribe(favorita => {
         this.listFavoritas.push(favorita);
-      });    
-      alert('Ideia favoritada')
-      this.router.navigate(['ideias/dashboard']);
+      });                
+      window.location.reload();
   }  
 
 }

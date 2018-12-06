@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IdeiaRoutes } from './ideias';
 
+
 export const routes: Routes = [
 	{ 
 		path: '', 

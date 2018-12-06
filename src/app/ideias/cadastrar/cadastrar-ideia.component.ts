@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms'; 
 
 import { IdeiaService, Ideia } from '../shared';
 import { Categoria } from '../shared/categoria.model';
@@ -13,7 +12,6 @@ import { Categoria } from '../shared/categoria.model';
 })
 export class CadastrarIdeiaComponent implements OnInit {
 
-  @ViewChild('formIdeia') formIdeia: NgForm;
   ideias: Ideia[] = [];
   categorias: Categoria[] = [];
   ideia: Ideia = new Ideia();
@@ -25,23 +23,41 @@ export class CadastrarIdeiaComponent implements OnInit {
     this.listaCategorias();   
   } 
 
-  cadastrar(): void {    
-    if (this.formIdeia.form.valid) { 
-      this.ideia.comentario_Avaliador = "";
-      this.ideia.idCategoria =  1;
-      this.ideia.ativa = "S";
-      var isAdmin = sessionStorage.getItem("user");
+  cadastrar(event) {
+    event.preventDefault()
+    const target = event.target
+    this.ideia.ativa = "S";
+    this.ideia.nome = target.querySelector('#nome').value
+    this.ideia.descricao = target.querySelector('#descricao').value
+    const selectd = target.querySelector("#categoria").selectedIndex
+    switch(selectd) {                  
+        case 0: 
+          this.ideia.idCategoria = 1;
+          break;
+        case 1: 
+          this.ideia.idCategoria = 2;
+          break;
+        case 2: 
+          this.ideia.idCategoria = 3;
+          break;
+        case 3: 
+          this.ideia.idCategoria = 4;
+          break;
+        default:
+          alert("Categoria Invalida");
+          this.router.navigate(['ideias/dashboard']);          
+    }
+    var isAdmin = sessionStorage.getItem("user");
       if (isAdmin== "1") {
         this.ideia.situacao = "Em Execução";
       } else {
         this.ideia.situacao = "Aberta";
       }
       this.ideiaService.cadastrarNovaIdeia(this.ideia)
-      .subscribe(ideia => {
-        alert('ideia cadastrada com  sucesso')
+      .subscribe(ideia => {        
         this.router.navigate(['ideias/dashboard']);
-      }); 
-    }   
+        alert('ideia cadastrada com  sucesso')
+      });     
   }
   listaCategorias(): void{
     this.ideiaService.listaCategoria()

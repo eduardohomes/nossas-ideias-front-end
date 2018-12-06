@@ -16,7 +16,7 @@ import { IdeiasModule } from './ideias';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    IdeiasModule
+    IdeiasModule,    
   ],
   providers: [ ],
   bootstrap: [AppComponent]

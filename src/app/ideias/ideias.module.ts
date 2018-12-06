@@ -9,12 +9,12 @@ import { CadastrarIdeiaComponent } from './cadastrar';
 import { EditarIdeiaComponent } from './editar';
 import { DashboardIdeiaComponent } from './dashboard';
 import { ComentarIdeiaComponent } from './comentar';
-import { LogarIdeiaComponent } from './logar';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PesquisarIdeiaComponent } from './pesquisar';
 import { ModalSucessoComponent } from './modal';
+import { ListarPesquisaIdeiaComponent } from './listarPesquisa';
 
 @NgModule({
   imports: [
@@ -29,11 +29,11 @@ import { ModalSucessoComponent } from './modal';
     EditarIdeiaComponent,
     DashboardIdeiaComponent,
     ComentarIdeiaComponent,
-    LogarIdeiaComponent,
     LoginComponent,
     LogoutComponent,
     ModalSucessoComponent,
-    PesquisarIdeiaComponent
+    PesquisarIdeiaComponent,
+    ListarPesquisaIdeiaComponent 
 
   ],
   providers: [

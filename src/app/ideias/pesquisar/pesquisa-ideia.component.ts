@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { IdeiaService, Ideia } from '../shared';
-import { DashboardIdeiaComponent } from '../dashboard';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pesquisa-ideia',
@@ -12,23 +12,29 @@ export class PesquisarIdeiaComponent implements OnInit {
 
   ideias: Ideia[] = [];
   ideia: Ideia = new Ideia();
-  dashboard: DashboardIdeiaComponent;
-
-  constructor(private ideiaService: IdeiaService) {}
+    
+  constructor(private ideiaService: IdeiaService, private router: ActivatedRoute ) {
+    
+  }
 
   ngOnInit(
+    
   ) {}
 
-  pesquisar(event) {
+  pesquisarPorCategoria() {    
+    this.ideia.idCategoria = this.router.snapshot.params['idCategoria'];
+    this.ideia.nome = this.router.snapshot.params['nome'];
+
+    
+    /*this.ideiaService.buscaPorCategoria(this.ideia)
+    .subscribe(ideias => this.ideias = ideias);  */
+  } 
+
+  pesquisarPorNome(event) {
     event.preventDefault()
     const target = event.target
     this.ideia.nome = target.querySelector('#nome').value    
     this.ideiaService.buscaPorNomeIdeia(this.ideia)
     .subscribe(ideias => this.ideias = ideias);  
-  }
-  
-  /*listaPorCategorias(ideia: Ideia): void{
-    this.ideiaService.buscaPorCategoria(ideia)
-    .subscribe(ideias => this.ideias = ideias);   
-  } */
+  }  
 }

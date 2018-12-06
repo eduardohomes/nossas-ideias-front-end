@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
         sessionStorage['token'] = JSON.stringify(usuario['token']);        
         sessionStorage['user'] = JSON.stringify(usuario['user']);    
         this.router.navigate(["/ideias/dashboard"])
+        window.location.reload();
       } else {
         window.alert("data.message")
       }
