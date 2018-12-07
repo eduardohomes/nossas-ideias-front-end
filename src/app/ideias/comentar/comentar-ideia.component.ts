@@ -36,6 +36,7 @@ export class ComentarIdeiaComponent implements OnInit {
     }
     alert("Comentário Salvo com Sucesso");   
     this.router.navigate(['ideias/dashboard']); 
+    window.location.reload();
   }
 
   listarTodosComentarios(): void {

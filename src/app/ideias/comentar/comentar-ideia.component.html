@@ -19,46 +19,53 @@
             </div>
           </nav>
     </div>
-    <div class="well">
-      <form #formComentario="ngForm">
-        <div class="form-group">
-          <label for="nome">Comentario</label>
-          <input 
-            type="text"
-            class="form-control"
-            id="comentario"
-            name="comentario"        
-            [(ngModel)]="comentario.comentario"
-            #comentario="ngModel"
-            minlength="5" 
-            required> 
-          <div *ngIf="comentario.errors && (comentario.dirty || comentario.touched)"
-               class="alert alert-danger">
-            <div [hidden]="!comentario.errors.required">
-              Digite a ideia.
+    <div class="container-fluid">
+        <form #formComentario="ngForm">
+            <div class="row justify-content-start">
+              <div class="col-6 form-group">
+                  <label for="nome">Comentario</label>
+                  <input 
+                    type="text"
+                    class="form-control"
+                    id="comentario"
+                    name="comentario"        
+                    [(ngModel)]="comentario.comentario"
+                    #comentario="ngModel"
+                    minlength="5" 
+                    required> 
+                  <div *ngIf="comentario.errors && (comentario.dirty || comentario.touched)"
+                      class="alert alert-danger">
+                    <div [hidden]="!comentario.errors.required">
+                      Digite a ideia.
+                    </div>
+                    <div [hidden]="!comentario.errors.minlength">
+                      A ideia deve conter ao menos 5 caracteres.
+                    </div>
+                  </div>
+              </div>   
             </div>
-            <div [hidden]="!comentario.errors.minlength">
-              A ideia deve conter ao menos 5 caracteres.
-            </div>
+        
+            <div class="row justify-content-start">
+              <div class="col-1">
+                  <button class="btn btn-primary"                        
+                  type="submit"
+                  (click)="comentar(comentario.comentario)"
+                  [disabled]="!formComentario.form.valid"               
+                  > Salvar
+                  </button>
+              </div>
+              <div class="col-1">
+                <a [routerLink]="['/ideias/dashboard']"
+                  class="btn btn-success col-auto">
+                  <span class="glyphicon glyphicon-chevron-left" 
+                    aria-hidden="true"></span> Voltar
+                </a>
+              </div>
           </div>
-        </div>   
-        <div class="form-group text-center">
-            <button  class="btn btn-success"                        
-              type="submit"
-              (click)="comentar(comentario.comentario)"
-              [disabled]="!formComentario.form.valid"               
-            > Salvar
-            </button>
-          <a [routerLink]="['/ideias/dashboard']"
-            class="btn btn-default">
-            <span class="glyphicon glyphicon-chevron-left" 
-              aria-hidden="true"></span> Voltar
-          </a>
-        </div>
-      </form>
-    </div>
-    
-    <table class="table table-striped table-bordered table-hover">
+      </form> 
+    </div>  
+    <br>
+    <table class="col-6 table table-striped table-bordered table-hover">
         <tr>
           <th class="text-rigth">Comentarios</th>      
         </tr>

@@ -1,74 +1,81 @@
 <div class="container-fluid">
-      <div class="jumbotron">
-         <div class="container push-spaces"></div>
+   <header class="business-header">
+      <div class="container">
+      <div class="row">
+         <div class="col-lg-12">
+            <h1 class="display-3 text-center text-white mt-4">Business Name or Tagline</h1>
+         </div>
       </div>
-      <div class="nav-scroller py-1 mb-2">
-         <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                     <a class="nav-link" [routerLink]="['/ideias/dashboard']">
-                     <i class="fa fa-home"></i>
-                     Home
-                     <span class="sr-only">(current)</span>
+      </div>
+   </header>
+   <div class="nav-scroller py-1 mb-2">
+      <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" [routerLink]="['/ideias/dashboard']">
+                  <i class="fa fa-home"></i>
+                  Home
+                  <span class="sr-only">(current)</span>
+                  </a>
+               </li>
+               <li class="nav-item">
+                  <ng-template [ngIf]="user == 1"> 
+                     <a class="nav-link" [routerLink]="['/ideias/listar']">                    
+                     <i class="fa fa-envelope">
+                     <span class="badge badge-danger"></span>
+                     </i>
+                     Pendentes Avaliacao
                      </a>
-                  </li>
-                  <li class="nav-item">
-                     <ng-template [ngIf]="user == 1"> 
-                        <a class="nav-link" [routerLink]="['/ideias/listar']">                    
-                        <i class="fa fa-envelope">
-                        <span class="badge badge-danger"></span>
-                        </i>
-                        Pendentes Avaliacao
-                        </a>
-                     </ng-template>
-                     <ng-template [ngIf]="user == 2">
-                        <a class="nav-link disabled">                    
-                        <i class="fa fa-envelope">
-                        <span class="badge badge-danger"></span>
-                        </i>
-                        Pendentes Avaliacao
-                        </a>
-                     </ng-template>
-                  </li>
-                  <li class="nav-item">
-                     <button 
-                        [routerLink]="['/ideias/cadastrar']" 
-                        type="button" 
-                        class='nav-link border-0' style='background-color:transparent;'
-                        data-toggle="modal" 
-                        data-target="#exampleModal"
-                        data-whatever="@mdo"><i class="fa fa-plus-square"></i>Conte sua ideia</button>
-                  </li>
-                  <li class="nav-item">
-                     <button 
-                        [routerLink]="['/ideias/pesquisar']" 
-                        type="button" 
-                        class='nav-link border-0' style='background-color:transparent;'                      
-                        ><i class="fa fa-search"></i>Pesquisar</button>
-                  </li>
-                  <li class="nav-item">
-                     <button 
-                        [routerLink]="['/ideias/login']" 
-                        type="button" 
-                        class='nav-link border-0' style='background-color:transparent;'                      
-                        ><i class="fa fa-sign-out-alt"></i>Logout
-                     </button>    
-                  </li>
-               </ul>
-            </div>
-         </nav>
-      </div>
-      <div  class="row justify-content-start">
-         <!--Buscar-->
-         <div  class="col">
-            <div  class="col">
+                  </ng-template>
+                  <ng-template [ngIf]="user == 2">
+                     <a class="nav-link disabled">                    
+                     <i class="fa fa-envelope">
+                     <span class="badge badge-danger"></span>
+                     </i>
+                     Pendentes Avaliacao
+                     </a>
+                  </ng-template>
+               </li>
+               <li class="nav-item">
+                  <button 
+                     [routerLink]="['/ideias/cadastrar']" 
+                     type="button" 
+                     class='nav-link border-0' style='background-color:transparent;'
+                     data-toggle="modal" 
+                     data-target="#exampleModal"
+                     data-whatever="@mdo"><i class="fa fa-plus-square"></i>Conte sua ideia</button>
+               </li>
+               <li class="nav-item">
+                  <button 
+                     [routerLink]="['/ideias/pesquisar']" 
+                     type="button" 
+                     class='nav-link border-0' style='background-color:transparent;'                      
+                     ><i class="fa fa-search"></i>Pesquisar</button>
+               </li>
+               <li class="nav-item">
+                  <button 
+                     [routerLink]="['/ideias/login']" 
+                     type="button" 
+                     class='nav-link border-0' style='background-color:transparent;'                      
+                     ><i class="fa fa-sign-out-alt"></i>Logout
+                  </button>    
+               </li>
+            </ul>
+         </div>
+      </nav>
+   </div>
+</div>
+<div class="container-fluid">
+   <div class="row justify-content-start">
+      <!--Buscar-->         
+      <div class="col-lg-2">
+            <h4>Busca</h4>
                <form (submit)="buscaPorCategoria($event)">
                   <ul class="list-group">
-                     <li  class="list-group-item"><label>Busca </label></li>
                      <li class="list-group-item">
                         <div class="form-group">
-                           <select class="form-control" id="categorias">
+                           <select class="form-control align-items-start" id="categorias">
                               <option>Selecione uma categoria</option>
                               <option>Gestão de Pessoas</option>
                               <option>Produtos</option>
@@ -76,7 +83,7 @@
                               <option>Suporte</option>
                            </select>
                         </div>
-                     </li>
+                     </li>                     
                      <li class="list-group-item">
                         <input id="campoBusca">
                      </li>
@@ -88,134 +95,135 @@
                      </li>
                   </ul>
                </form>
-            </div>
             <br>
-            <div class="col">
-               <h1> Categorias </h1>
                <ul class="list-group">
-                  <li *ngFor="let categoria of listcategorias | slice:0:4 ; index as i" class="list-group-item d-flex justify-content-between align-items-center"> {{categoria.nome}}           
+                  <li class="list-group-item"><label>Categorias</label></li>
+                  <li *ngFor="let categoria of listcategorias" class="list-group-item d-flex justify-content-between align-items-center"> {{categoria.nome}}           
                      <span class="badge badge-primary badge-pill">{{categoria.quantidade}} </span>
                   </li>
                </ul>
-            </div>
             <br>
-         </div>
-         <!--Em Alta e Favoritas-->
-         <div class="col-6">
-            <!--Em alta-->
-            <div class="col">
-               <h1> Em Alta </h1>
-               <div class="card-group">
-                  <div [attr.id]="listEmAlta.id" *ngFor="let listEmAlta of listEmAltas | slice:0:3 ; index as i" class="card" style="width: 18rem;">
-                  <div class="card-body">
-                     <h5 class="card-title">{{ listEmAlta.nome }}</h5>
-                     <p class="card-text">{{ listEmAlta.descricao }}</p>
-                     <p class="card-text">{{ listEmAlta.situacao }}</p>
-                  </div>
-                  <div class="card-footer">
-                     <button 
-                        class='btn btn-lg' style='background-color:transparent;'
-                        type="submit"
-                        (click)="somarGostou(listEmAlta.id)"
-                        ><i class="far fa-thumbs-up">  {{ listEmAlta.quantidadeSim }}</i>
-                     </button> 
-                     <button 
-                        class='btn btn-lg ' style='background-color:transparent;'
-                        type="submit"                        
-                        (click)="somarNaoGostou(listEmAlta.id)"
-                        ><i class="far fa-thumbs-down">  {{ listEmAlta.quantidadeNao }}</i>
-                     </button>   
-                     <button 
-                        class='btn btn-lg ' style='background-color:transparent;'
-                        type="submit"                                      
-                        (click)="favoritar(listEmAlta.id)"><i class="far fa-star"></i>
-                     </button>
-                     <button 
-                        class='btn btn-lg ' 
-                        [routerLink]="['/ideias/comentar', listEmAlta.id]"
-                        style='background-color:transparent;'
-                        ><i class="far fa-comment">  {{ listEmAlta.quantidadeComentario }}</i>
-                     </button>
-                  </div>
-               </div>
+      </div>
+      <!--Em alta e Favoritos-->
+      <div class="col-lg-7">
+         <!--Em alta-->
+         <h3> Em alta </h3>
+         <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4" [attr.id]="ideiaEmAlta.id" *ngFor="let ideiaEmAlta of listEmAltas | slice:0:3 ; index as i" >
+               <!--Em Colaboração-->
+               <ng-template [ngIf]="ideiaEmAlta.situacao != 'Aberta' && ideiaEmAlta.situacao != 'Rejeitada'">    
+                     <div class="card border-success">  
+                           <div class="card-body">
+                              <h4 class="card-title">{{ ideiaEmAlta.nome }}</h4>
+                              <h5>{{ ideiaEmAlta.situacao }}</h5>
+                              <p class="card-text">{{ ideiaEmAlta.descricao }}</p>
+                           </div>
+                           <div class="card-footer bg-transparent border-success row justify-content-start">
+                                 <button 
+                                    class='btn btn-lg' style='background-color:transparent;'
+                                    type="submit"
+                                    (click)="somarGostou(ideiaEmAlta.id)"
+                                    ><i class="far fa-thumbs-up"> {{ ideiaEmAlta.quantidadeSim }}</i>
+                                 </button> 
+                                 <button 
+                                    class='btn btn-lg ' style='background-color:transparent;'
+                                    type="submit"                        
+                                    (click)="somarNaoGostou(ideiaEmAlta.id)"
+                                    ><i class="far fa-thumbs-down"> {{ ideiaEmAlta.quantidadeNao }}</i>
+                                 </button>   
+                                 <button 
+                                    class='btn btn-lg ' style='background-color:transparent;'
+                                    type="submit"                                      
+                                    (click)="favoritar(ideiaEmAlta.id)"><i class="far fa-star"></i>
+                                 </button>
+                                 <button 
+                                    class='btn btn-lg ' 
+                                    [routerLink]="['/ideias/comentar', ideiaEmAlta.id]"
+                                    style='background-color:transparent;'
+                                    ><i class="far fa-comment"> {{ ideiaEmAlta.quantidadeComentario }}</i>
+                                 </button>
+                           </div>
+                        </div>    
+               </ng-template>                                    
             </div>
          </div>
-         <br>
-         <br>
          <!--Favoritas-->
-         <div class="col">
-            <h1> Favoritas </h1>
-            <div class="card-group">
-               <div [attr.id]="favorita.id" *ngFor="let favorita of listFavoritas" class="card" style="width: 18rem;">
-               <div class="card-body">
-                  <h5 class="card-title">{{ favorita.nome }}</h5>
-                  <p class="card-text">{{ favorita.descricao }}</p>
-                  <p class="card-text">{{ favorita.situacao }}</p>
-               </div>
-               <div class="card-footer">
-                  <button 
-                     class='btn btn-lg' style='background-color:transparent;'
-                     type="submit"
-                     (click)="somarGostou(favorita.id)"
-                     ><i class="far fa-thumbs-up">{{ favorita.quantidadeSim }}</i>
-                  </button> 
-                  <button 
-                     class='btn btn-lg ' style='background-color:transparent;'
-                     type="submit"                        
-                     (click)="somarNaoGostou(favorita.id)"
-                     ><i class="far fa-thumbs-down">{{ favorita.quantidadeNao }}</i>
-                  </button>   
-                  <button 
-                     class='btn btn-lg ' style='background-color:transparent;'
-                     type="submit"                                      
-                     (click)="favoritar(favorita.id)"><i class="far fa-star"></i>
-                  </button>
-                  <button 
-                     class='btn btn-lg ' 
-                     [routerLink]="['/ideias/comentar', favorita.id]"
-                     style='background-color:transparent;'
-                     ><i class="far fa-comment">{{ favorita.quantidadeComentario }}</i>
-                  </button>
-               </div>
-            </div>
+         <h3> Favoritas </h3>
+         <div class="row">
+               <div class="col-lg-4 col-md-6 mb-4 " [attr.id]="favorita.id" *ngFor="let favorita of listFavoritas">
+                     <div class="card h-100">
+                        <div class="card-body">
+                           <h4 class="card-title">{{ favorita.nome }}</h4>
+                           <h5>{{ favorita.situacao }}</h5>
+                           <p class="card-text">{{ favorita.descricao }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent row justify-content-start">
+                              <button 
+                                 class='btn btn-lg' style='background-color:transparent;'
+                                 type="submit"
+                                 (click)="somarGostou(favorita.id)"
+                                 ><i class="far fa-thumbs-up"> {{ favorita.quantidadeSim }}</i>
+                              </button> 
+                              <button 
+                                 class='btn btn-lg ' style='background-color:transparent;'
+                                 type="submit"                        
+                                 (click)="somarNaoGostou(favorita.id)"
+                                 ><i class="far fa-thumbs-down"> {{ favorita.quantidadeNao }}</i>
+                              </button>   
+                              <button 
+                                 class='btn btn-lg ' style='background-color:transparent;'
+                                 type="submit"                                      
+                                 (click)="favoritar(favorita.id)"><i class="far fa-star"></i>
+                              </button>
+                              <button 
+                                 class='btn btn-lg ' 
+                                 [routerLink]="['/ideias/comentar', favorita.id]"
+                                 style='background-color:transparent;'
+                                 ><i class="far fa-comment"> {{ favorita.quantidadeComentario }}</i>
+                              </button>
+                        </div>
+                     </div>
+               </div>      
          </div>
       </div>
-   </div>
-   <!--Ultimas Cadastradas-->
-   <div class="col">
-      <h1> Últimas Cadastradas </h1>
-      <div [attr.id]="listUltima.id" *ngFor="let listUltima of listUltimasCadastradas | slice:0:5 ; index as i" class="card" style="width: 20rem;">      
-      <div class="card-body">
-         <h5 class="card-title">{{ listUltima.nome }}</h5>
-         <p class="card-text">{{ listUltima.descricao }}</p>
-         <p class="card-text">{{ listUltima.situacao }}</p>
-      </div>
-      <div class="card-footer">
-         <button 
-            class='btn btn-lg' style='background-color:transparent;'
-            type="submit"
-            (click)="somarGostou(listUltima.id)"
-            ><i class="far fa-thumbs-up">  {{ listUltima.quantidadeSim }}</i>
-         </button> 
-         <button 
-            class='btn btn-lg ' style='background-color:transparent;'
-            type="submit"                        
-            (click)="somarNaoGostou(listUltima.id)"
-            ><i class="far fa-thumbs-down">  {{ listUltima.quantidadeNao }}</i>
-         </button>   
-         <button 
-            class='btn btn-lg ' style='background-color:transparent;'
-            type="submit"                                      
-            (click)="favoritar(listUltima.id)"><i class="far fa-star"></i>
-         </button>
-         <button 
-            class='btn btn-lg ' 
-            [routerLink]="['/ideias/comentar', listUltima.id]"
-            style='background-color:transparent;'
-            ><i class="far fa-comment">  {{ listUltima.quantidadeComentario }}</i>
-         </button>
-      </div>
-   </div>
-   </div>
-   </div>
-   </div>
+      <!--Ultimas Ideias-->
+      <div class="col-lg-3">
+            <h3> Ultimas Ideias </h3>
+            <div [attr.id]="ultimasIdeias.id" *ngFor="let ultimasIdeias of listUltimasCadastradas | slice:0:5 ; index as i
+               <div class="card h-100">
+                     <div class="card-body">
+                        <h4 class="card-title">{{ ultimasIdeias.nome }}</h4>
+                        <h5>{{ ultimasIdeias.situacao }}</h5>
+                        <p class="card-text">{{ ultimasIdeias.descricao }}</p>
+                     </div>
+                     <div class="card-footer bg-transparent row justify-content-start">
+                           <button 
+                              class='btn btn-lg' style='background-color:transparent;'
+                              type="submit"
+                              (click)="somarGostou(ultimasIdeias.id)"
+                              ><i class="far fa-thumbs-up"> {{ ultimasIdeias.quantidadeSim }}</i>
+                           </button> 
+                           <button 
+                              class='btn btn-lg ' style='background-color:transparent;'
+                              type="submit"                        
+                              (click)="somarNaoGostou(ultimasIdeias.id)"
+                              ><i class="far fa-thumbs-down"> {{ ultimasIdeias.quantidadeNao }}</i>
+                           </button>   
+                           <button 
+                              class='btn btn-lg ' style='background-color:transparent;'
+                              type="submit"                                      
+                              (click)="favoritar(ultimasIdeias.id)"><i class="far fa-star"></i>
+                           </button>
+                           <button 
+                              class='btn btn-lg ' 
+                              [routerLink]="['/ideias/comentar', ultimasIdeias.id]"
+                              style='background-color:transparent;'
+                              ><i class="far fa-comment"> {{ ultimasIdeias.quantidadeComentario }}</i>
+                           </button>
+                     </div>
+               </div>
+               <br>
+            </div>
+      </div>      
+   </div>  
+</div>

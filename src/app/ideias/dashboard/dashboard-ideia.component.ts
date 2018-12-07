@@ -37,11 +37,6 @@ export class DashboardIdeiaComponent implements OnInit {
     this.listaPorCategorias();        
   }
 
-  contaVotos(): void{
-    this.ideiaService.contaVotos()
-    .subscribe(listVotos => this.listVotos = listVotos);  
-  }
-  
   buscaPorCategoria(event) {
     event.preventDefault()
     const target = event.target
@@ -99,6 +94,8 @@ export class DashboardIdeiaComponent implements OnInit {
       .subscribe(voto => {
         this.votos.push(voto);        
     });       
+    alert("Voto realizado com sucesso")!
+    window.location.reload();
   }
 
   somarNaoGostou(idIdeia: number): void {          

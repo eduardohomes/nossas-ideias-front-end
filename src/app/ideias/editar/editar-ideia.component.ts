@@ -39,42 +39,19 @@ export class EditarIdeiaComponent implements OnInit {
     this.location.back();
   }
 
-  cadastrar(event) {
+  atualizar(event) {
     event.preventDefault()
     const target = event.target
     this.ideia.ativa = "S";
     this.ideia.nome = target.querySelector('#nome').value
     this.ideia.descricao = target.querySelector('#descricao').value
-    /*const selectd = target.querySelector("#categoria").selectedIndex
-    switch(selectd) {                  
-        case 0: 
-          this.ideia.idCategoria = 1;
-          break;
-        case 1: 
-          this.ideia.idCategoria = 2;
-          break;
-        case 2: 
-          this.ideia.idCategoria = 3;
-          break;
-        case 3: 
-          this.ideia.idCategoria = 4;
-          break;
-        default:
-          alert("Categoria Invalida");
-          this.router.navigate(['ideias/dashboard']);          
-    }*/
-    this.ideia.situacao = target.querySelector("#situacao").value
-    var isAdmin = sessionStorage.getItem("user");
-      if (isAdmin== "1") {
-        this.ideia.situacao = "Em Execução";
-      } else {
-        this.ideia.situacao = "Aberta";
-      }
-      this.ideiaService.cadastrarNovaIdeia(this.ideia)
-      .subscribe(ideia => {        
-        this.router.navigate(['ideias/dashboard']);
-        alert('ideia cadastrada com  sucesso')
-      });     
+    
+    this.ideiaService.atualizarIdeia(this.ideia)
+    .subscribe(ideia => {        
+      alert('ideia cadastrada com  sucesso')
+    });
+    this.router.navigate(['ideias/editar']);
+    
   }
 
   
