@@ -1,13 +1,13 @@
-/*!
- * Start Bootstrap - Busines Frontpage (https://startbootstrap.com/template-overviews/business-frontpage)
- * Copyright 2013-2017 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-business-frontpage/blob/master/LICENSE)
- */
-
+/* You can add global styles to this file, and also import other style files */
 body {
-  padding-top: 54px;
+    padding-top: 54px;
+    font-family: 'Open Sans', sans-serif;
 }
 
+.btn-group-lg>.btn, .btn-lg {
+  padding: .5rem 0.8rem;
+}
+  
 @media (min-width: 992px) {
   body {
     padding-top: 56px;
@@ -29,7 +29,7 @@ body {
 .business-header {
   height: 50vh;
   min-height: 300px;
-  background-image: url("../imagens/inicial.png");
+  background-image: url("/src/app/ideias/imagens/inicial.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
